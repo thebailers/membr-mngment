@@ -2,11 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import ClassList from "../class-list.component";
 
-import {
-  ClassesContext,
-  ClassesContextType,
-} from "../../../contexts/classes.context";
-
 import { classTimes, classTypes, classLength } from "../../../utils/classutils";
 import { daysOfTheWeek } from "../../../utils/classutils";
 import { ClassDetail } from "../class-list.component";
@@ -44,24 +39,14 @@ const MockClassesData: ClassDetail[] = [
   },
 ];
 
-const setup = (value: ClassesContextType) =>
-  render(
-    <ClassesContext.Provider value={value}>
-      <MemoryRouter>
-        <ClassList classesData={MockClassesData} />
-      </MemoryRouter>
-    </ClassesContext.Provider>
-  );
-
 describe("the class list component", () => {
   test("renders the class list component", () => {
-    const value = {
-      activeWeekdayNumber: 3, // wednesday
-      setActiveWeekdayNumber: () => {},
-      activeClassTime: null,
-      setActiveClassTime: () => {},
-    };
-    setup(value);
+    const route = "/classes/wednesday";
+    render(
+      <MemoryRouter initialEntries={[route]}>
+        <ClassList classesData={MockClassesData} activeWeekdayNumber={3} />
+      </MemoryRouter>
+    );
     expect(screen.getByText("16.00")).toBeInTheDocument();
     expect(screen.getByText("16.45")).toBeInTheDocument();
     expect(screen.getByText("18.00")).toBeInTheDocument();
@@ -72,7 +57,7 @@ describe("the class list component", () => {
     const emptyMockClassesData: ClassDetail[] = [];
     render(
       <MemoryRouter>
-        <ClassList classesData={emptyMockClassesData} />
+        <ClassList classesData={emptyMockClassesData} activeWeekdayNumber={1} />
       </MemoryRouter>
     );
     expect(screen.getByText(/Loading classes.../i)).toBeInTheDocument();

@@ -12,12 +12,11 @@ import {
   daysOfWeekArray,
 } from "../../utils/utils";
 
-import { ClassesContext } from "../../contexts/classes.context";
-
 import { ClassTimeBlock } from "./class-list.styles";
 
 type ClassListProps = {
   classesData: ClassDetail[];
+  activeWeekdayNumber: number;
 };
 
 export type ClassDetail = {
@@ -28,9 +27,10 @@ export type ClassDetail = {
   classLength: classLength;
 };
 
-const ClassList: FC<ClassListProps> = ({ classesData }) => {
-  const { activeWeekdayNumber, setActiveClassTime } =
-    useContext(ClassesContext);
+const ClassList: FC<ClassListProps> = ({
+  classesData,
+  activeWeekdayNumber,
+}) => {
   const [specificDayClasses, setSpecificDayClasses] = useState<ClassDetail[]>(
     []
   );
@@ -55,7 +55,6 @@ const ClassList: FC<ClassListProps> = ({ classesData }) => {
                 daysOfWeekArray[activeWeekdayNumber]
               )}/${urlFriendlyTime(c.time)}`}
               key={c.id}
-              onClick={() => setActiveClassTime(c.time)}
             >
               {c.time}
             </ClassTimeBlock>
