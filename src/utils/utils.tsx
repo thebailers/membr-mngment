@@ -30,3 +30,8 @@ export const getWeekdayNumberFromURL = (day: weekdaysLowerCase): number =>
 
 export const getTodayDOWString = (): string =>
   daysOfWeekArray[new Date().getDay()];
+
+export const getDayOfWeekStringFromUrl = (
+  url: string,
+  replacePattern: string
+): string => url.replace(replacePattern, "");

@@ -1,15 +1,15 @@
 import { ClassDetail } from "../components/class-list/class-list.component";
 
 export enum classTimes {
-  morning0930 = "09.30",
-  morning1015 = "10.15",
-  morning1100 = "11.00",
-  morning1130 = "11.30",
-  afternoon1600 = "16.00",
-  afternoon1645 = "16.45",
-  evening1800 = "18.00",
-  evening1830 = "18.30",
-  evening1930 = "19.00",
+  morning0930 = "0930",
+  morning1015 = "1015",
+  morning1100 = "1100",
+  morning1130 = "1130",
+  afternoon1600 = "1600",
+  afternoon1645 = "1645",
+  evening1800 = "1800",
+  evening1830 = "1830",
+  evening1930 = "1900",
 }
 
 export enum classTypes {
@@ -29,10 +29,10 @@ export enum daysOfTheWeek {
 }
 
 export enum classLength {
-  cubs = "45 mins",
-  mid = "90 mins",
-  fundamentalsJuniors = "1 hour",
-  standard = "2 hours",
+  cubs = 45,
+  fundamentalsJuniors = 60,
+  mid = 90,
+  standard = 120,
 }
 
 export const classesData: ClassDetail[] = [

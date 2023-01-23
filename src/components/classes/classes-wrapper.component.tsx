@@ -10,7 +10,7 @@ const ClassesWrapper = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to={`/classes/${today}`} />} />
-      <Route path="/*" element={<Classes />} />
+      <Route path="/:weekday" element={<Classes />} />
       <Route path="/:weekday/:time" element={<SpecificClass />} />
     </Routes>
   );

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { classesData } from "../../utils/classutils";
 import {
@@ -12,16 +12,17 @@ import ClassesMenu from "./classes-menu.component";
 import ClassList from "../class-list/class-list.component";
 
 const Classes = () => {
+  const { weekday } = useParams();
   const [activeWeekdayNumber, setActiveWeekdayNumber] = useState<number | null>(
     null
   );
-  const location = useLocation();
 
   useEffect(() => {
-    // /classes/weekday
-    const dow = location.pathname.replace("/classes/", "");
-    setActiveWeekdayNumber(getWeekdayNumberFromURL(dow as weekdaysLowerCase));
-  }, [location]);
+    // /classes/weekday;
+    setActiveWeekdayNumber(
+      getWeekdayNumberFromURL(weekday as weekdaysLowerCase)
+    );
+  }, [weekday]);
 
   return (
     <div>

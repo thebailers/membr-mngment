@@ -1,12 +1,11 @@
-import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { screen } from "@testing-library/react";
+import { Routes, Route } from "react-router-dom";
 import ClassList from "../class-list.component";
+import { renderWithRouter } from "../../../testUtils";
 
 import { classTimes, classTypes, classLength } from "../../../utils/classutils";
 import { daysOfTheWeek } from "../../../utils/classutils";
 import { ClassDetail } from "../class-list.component";
-
-const weekdayNumber = 3; // Wednesday
 
 const MockClassesData: ClassDetail[] = [
   {
@@ -39,26 +38,43 @@ const MockClassesData: ClassDetail[] = [
   },
 ];
 
+const setup = (route: string) =>
+  renderWithRouter(
+    <Routes>
+      <Route
+        path="/classes/:weekday"
+        element={
+          <ClassList classesData={MockClassesData} activeWeekdayNumber={3} />
+        }
+      />
+    </Routes>,
+    { route }
+  );
+
 describe("the class list component", () => {
   test("renders the class list component", () => {
-    const route = "/classes/wednesday";
-    render(
-      <MemoryRouter initialEntries={[route]}>
-        <ClassList classesData={MockClassesData} activeWeekdayNumber={3} />
-      </MemoryRouter>
-    );
-    expect(screen.getByText("16.00")).toBeInTheDocument();
-    expect(screen.getByText("16.45")).toBeInTheDocument();
-    expect(screen.getByText("18.00")).toBeInTheDocument();
-    expect(screen.getByText("19.00")).toBeInTheDocument();
+    setup("/classes/wednesday");
+    expect(screen.getByText("1600")).toBeInTheDocument();
+    expect(screen.getByText("1645")).toBeInTheDocument();
+    expect(screen.getByText("1800")).toBeInTheDocument();
+    expect(screen.getByText("1900")).toBeInTheDocument();
   });
 
   test("displays loading until the class data loads", () => {
     const emptyMockClassesData: ClassDetail[] = [];
-    render(
-      <MemoryRouter>
-        <ClassList classesData={emptyMockClassesData} activeWeekdayNumber={1} />
-      </MemoryRouter>
+    renderWithRouter(
+      <Routes>
+        <Route
+          path="/classes/:weekday"
+          element={
+            <ClassList
+              classesData={emptyMockClassesData}
+              activeWeekdayNumber={0}
+            />
+          }
+        />
+      </Routes>,
+      { route: "/classes/monday" }
     );
     expect(screen.getByText(/Loading classes.../i)).toBeInTheDocument();
   });

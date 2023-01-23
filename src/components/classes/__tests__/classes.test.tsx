@@ -1,29 +1,29 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { BrowserRouter } from "react-router-dom";
+import { screen, fireEvent } from "@testing-library/react";
+import { Routes, Route } from "react-router-dom";
 import Classes from "../classes.component";
 
 import { daysOfWeekArray } from "../../../utils/utils";
 
-const renderWithRouter = (ui, { route = "/" } = {}) => {
-  window.history.pushState({}, "Test page", route);
+import { renderWithRouter } from "../../../testUtils";
 
-  return {
-    user: userEvent,
-    ...render(ui, { wrapper: BrowserRouter }),
-  };
-};
+const setup = (route: string) =>
+  renderWithRouter(
+    <Routes>
+      <Route path="/classes/:weekday" element={<Classes />} />
+    </Routes>,
+    { route }
+  );
 
 describe("the classes component", () => {
   test("displays the heading with the current day of the week active", () => {
     const today = daysOfWeekArray[new Date().getDay()];
-    renderWithRouter(<Classes />, { route: `/classes/${today}` });
+    setup(`/classes/${today}`);
     const regexp = `${today} Classes`;
     expect(screen.getByText(new RegExp(regexp, "i"))).toBeInTheDocument();
   });
 
   test("displays the relevant heading when a day of the week link is clicked", () => {
-    renderWithRouter(<Classes />, { route: "/classes/sunday" });
+    setup("/classes/sunday");
     const link = screen.getByRole("link", { name: "Wednesday" });
     fireEvent.click(link);
     expect(screen.getByText(/wednesday classes/i)).toBeInTheDocument();
@@ -39,7 +39,7 @@ describe("the classes component", () => {
   });
 
   test("displays the correct day of the week heading that matches the url", () => {
-    renderWithRouter(<Classes />, { route: "/classes/friday" });
+    setup("/classes/friday");
     expect(screen.getByText(/friday classes/i)).toBeInTheDocument();
   });
 });

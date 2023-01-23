@@ -6,8 +6,6 @@ import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 
-import { ClassesProvider } from "./contexts/classes.context";
-
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -15,9 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ClassesProvider>
-        <App />
-      </ClassesProvider>
+      <App />
     </BrowserRouter>
   </React.StrictMode>
 );
