@@ -5,7 +5,7 @@ import {
   classLength,
   classTypes,
   daysOfTheWeek,
-} from "../../utils/classutils";
+} from "../../utils/classUtils";
 import {
   urlFriendlyTime,
   urlFriendlyWeekday,

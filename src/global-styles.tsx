@@ -57,3 +57,25 @@ export const ActiveLink = styled(HorizontalMenuLink)`
 export const InactiveLink = styled(HorizontalMenuLink)`
   color: #9b9b93;
 `;
+
+export const NotesContainer = styled.div`
+  background: #3b3b3b;
+  border: 1px solid lightgray;
+  display: inline-block;
+  margin-bottom: 25px;
+  padding: 20px;
+`;
+
+export const NotesHeader = styled.h3`
+  color: #b3b3b3;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 10px;
+`;
+
+export const NotesList = styled.li`
+  color: #b3b3b3;
+  font-size: 16px;
+  font-weight: 400;
+  margin-left: 10px;
+`;

@@ -3,8 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import ClassList from "../class-list.component";
 import { renderWithRouter } from "../../../testUtils";
 
-import { classTimes, classTypes, classLength } from "../../../utils/classutils";
-import { daysOfTheWeek } from "../../../utils/classutils";
+import { classTimes, classTypes, classLength } from "../../../utils/classUtils";
+import { daysOfTheWeek } from "../../../utils/classUtils";
 import { ClassDetail } from "../class-list.component";
 
 const MockClassesData: ClassDetail[] = [

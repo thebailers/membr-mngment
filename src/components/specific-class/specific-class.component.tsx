@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-import SpecificClassHeader from "./specific-class-header.component";
-import SignInToClass from "../signin-to-class/signin-to-class.component";
+import SigninToClass from "../signin-to-class/signin-to-class.component";
 
 import { capitaliseFirstLetter, daysOfWeekArray } from "../../utils/utils";
 import { ClassDetail } from "../class-list/class-list.component";
-import { classesData } from "../../utils/classutils";
+import { classesData } from "../../utils/classUtils";
 import { getClassSigninTimes } from "../../utils/dateUtils";
+
+export enum AccessStatus {
+  pending = "pending",
+  authorised = "authorised",
+  unauthorised = "unauthorised",
+}
 
 const SpecificClass = () => {
   const { weekday, time } = useParams();
   const [classData, setClassData] = useState<ClassDetail | null>(null);
-  const [canSignIn, setCanSignIn] = useState<boolean | undefined>(undefined);
+  const [canSignIn, setCanSignIn] = useState<AccessStatus>(
+    AccessStatus.pending
+  );
   const [isClassToday, setIsClassToday] = useState<boolean | undefined>(
     undefined
   );
@@ -40,9 +46,11 @@ const SpecificClass = () => {
 
   // Check if the user can sign in to class
   useEffect(() => {
-    if (isClassToday && classData) {
+    if (classData) {
       const signInCheckTimer = setInterval(() => {
-        const now = new Date();
+        // const now = new Date();
+        // const now = new Date("Mon Jan 23 2023 18:14:00 GMT+0000");
+        const now = new Date("Mon Jan 23 2023 18:25:00 GMT+0000");
         const classTime = classData.time; // 0930
         const classTimeHours = parseInt(classTime.slice(0, 2));
         const classTimeMins = parseInt(classTime.slice(-2));
@@ -55,8 +63,8 @@ const SpecificClass = () => {
         );
 
         now >= classSigninStart && now <= classSigninEnd
-          ? setCanSignIn(true)
-          : setCanSignIn(false);
+          ? setCanSignIn(AccessStatus.authorised)
+          : setCanSignIn(AccessStatus.unauthorised);
       }, 1000);
       return () => clearInterval(signInCheckTimer);
     }
@@ -64,19 +72,12 @@ const SpecificClass = () => {
 
   return (
     <div>
-      {classData && typeof canSignIn === "boolean" ? (
-        <div>
-          <SpecificClassHeader
-            day={classData.dayOfWeek}
-            time={classData.time}
-          />
-          {/* <SignInToClass /> */}
-          {canSignIn ? (
-            <p>Class sign in</p>
-          ) : (
-            <p>Cannot sign in to this class yet</p>
-          )}
-        </div>
+      {classData && canSignIn !== AccessStatus.pending ? (
+        <SigninToClass
+          dayOfWeek={classData.dayOfWeek}
+          time={classData.time}
+          canSignIn={canSignIn}
+        />
       ) : (
         <>Loading spinner [TODO]</>
       )}
