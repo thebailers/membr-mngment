@@ -48,9 +48,9 @@ const SpecificClass = () => {
   useEffect(() => {
     if (classData) {
       const signInCheckTimer = setInterval(() => {
-        // const now = new Date();
+        const now = new Date();
         // const now = new Date("Mon Jan 23 2023 18:14:00 GMT+0000");
-        const now = new Date("Mon Jan 23 2023 18:25:00 GMT+0000");
+        // const now = new Date("Mon Jan 23 2023 18:25:00 GMT+0000");
         const classTime = classData.time; // 0930
         const classTimeHours = parseInt(classTime.slice(0, 2));
         const classTimeMins = parseInt(classTime.slice(-2));
