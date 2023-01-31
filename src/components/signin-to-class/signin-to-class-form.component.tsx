@@ -1,34 +1,19 @@
-import { useState, ChangeEvent, useEffect, FC } from "react";
-import { Member } from "../../utils/memberUtils";
+import { ChangeEvent, FC, Dispatch, SetStateAction } from "react";
 import { SignInInput, SignInlabel } from "./signin-to-class-form.styles";
 
 export type SigninToClassFormProps = {
-  members: Member[];
-  handleSignin: (m: Member) => void;
+  signinInput: string;
+  setSigninInput: Dispatch<SetStateAction<string>>;
 };
 
 const SigninToClassForm: FC<SigninToClassFormProps> = ({
-  members,
-  handleSignin,
+  signinInput,
+  setSigninInput,
 }) => {
-  const [inputValue, setInputValue] = useState<string>("");
-  const [potentialMembers, setPotentialMembers] = useState<Member[]>([]);
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setInputValue(value);
+    setSigninInput(value);
   };
-
-  useEffect(() => {
-    let filteredMembers: Member[] = [];
-    if (inputValue) {
-      filteredMembers = members.filter((m) => {
-        const regexp = new RegExp(inputValue, "i");
-        return `${m.firstName} ${m.lastName}`.match(regexp);
-      });
-    }
-    setPotentialMembers(filteredMembers);
-  }, [inputValue, members]);
 
   return (
     <div>
@@ -38,21 +23,9 @@ const SigninToClassForm: FC<SigninToClassFormProps> = ({
         name="class-signin"
         aria-label="class-signin"
         id="class-signin"
-        value={inputValue}
+        value={signinInput}
         onChange={handleChange}
       />
-      {potentialMembers && (
-        <ul>
-          {potentialMembers.map((m) => (
-            <li
-              key={`mem-${m.id}`}
-              onClick={() => handleSignin(m)}
-            >{`${m.firstName} ${m.lastName}`}</li>
-          ))}
-        </ul>
-      )}
-
-      {inputValue && !potentialMembers.length && <p>No members found</p>}
     </div>
   );
 };

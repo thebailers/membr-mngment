@@ -1,3 +1,5 @@
+import { Member } from "./memberUtils";
+
 export const daysOfWeekArray: string[] = [
   "Sunday",
   "Monday",
@@ -35,3 +37,18 @@ export const getDayOfWeekStringFromUrl = (
   url: string,
   replacePattern: string
 ): string => url.replace(replacePattern, "");
+
+export const removeDuplicates = (arr1: Member[], arr2: Member[]) =>
+  arr1.filter(
+    (array1Item) => arr2.findIndex((e) => e.id === array1Item.id) === -1
+  );
+
+// returns boolean - checking if an object exists in both arrays
+export const duplicateObjectInArrays = <T,>(
+  arr1: T[],
+  arr2: T[],
+  identifier: keyof T
+): boolean =>
+  arr1.some((arr1Obj) =>
+    arr2.some((arr2Obj) => arr2Obj[identifier] === arr1Obj[identifier])
+  );

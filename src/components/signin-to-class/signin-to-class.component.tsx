@@ -1,40 +1,62 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
+
 import SpecificClassHeader from "../specific-class/specific-class-header.component";
 import SigninToClassForm from "./signin-to-class-form.component";
+import SignedIn from "./signed-in.component";
+import FilteredMembers from "../filtered-members/filtered-members.component";
 
 import { AccessStatus } from "../specific-class/specific-class.component";
 
 import { NotesContainer, NotesHeader, NotesList } from "../../global-styles";
 import { Member, memberData } from "../../utils/memberUtils";
+import { removeDuplicates, duplicateObjectInArrays } from "../../utils/utils";
 
-export type SignInToClassProps = {
+export type SigninToClassProps = {
   dayOfWeek: string;
   time: string;
   canSignIn: AccessStatus;
 };
 
-const removeDuplicates = (arr1: Member[], arr2: Member[]) =>
-  arr1.filter(
-    (array1Item) => arr2.findIndex((e) => e.id === array1Item.id) === -1
-  );
-
-const SigninToClass: FC<SignInToClassProps> = ({
+const SigninToClass: FC<SigninToClassProps> = ({
   dayOfWeek,
   time,
   canSignIn,
 }) => {
   const [signedIn, setSignedIn] = useState<Member[]>([]);
   const [notSignedIn, setNotSignedIn] = useState<Member[]>(memberData);
+  const [potentialMembers, setPotentialMembers] = useState<Member[]>([]);
+  const [signinInput, setSigninInput] = useState<string>("");
 
-  // when user is signed in, remove from notSignedIn array
+  // Set filtered list
   useEffect(() => {
-    if (signedIn.length > 0) {
-      const removedMember = removeDuplicates(notSignedIn, signedIn);
-      setNotSignedIn(removedMember);
+    let filteredMembers: Member[] = [];
+    if (signinInput) {
+      filteredMembers = notSignedIn.filter((m) => {
+        const regexp = new RegExp(signinInput, "i");
+        return `${m.firstName} ${m.lastName}`.match(regexp);
+      });
     }
-  }, [signedIn, notSignedIn]);
+    setPotentialMembers(filteredMembers);
+  }, [signinInput, notSignedIn]);
+
+  // If member has just signed in, remove member from not signed in list
+  const removeFromNotSignedInCheck = useCallback(
+    (signedIn: Member[]) => {
+      if (duplicateObjectInArrays<Member>(signedIn, notSignedIn, "id")) {
+        const removedMember = removeDuplicates(notSignedIn, signedIn);
+        setNotSignedIn(removedMember);
+      }
+    },
+    [notSignedIn]
+  );
+
+  // remove newly signed in member from notSigned in member list
+  useEffect(() => {
+    removeFromNotSignedInCheck(signedIn);
+  }, [signedIn, removeFromNotSignedInCheck]);
 
   const handleSignin = ({ id, firstName, lastName }: Member) => {
+    setSigninInput(""); // reset the sign in input
     const updatedMembers = [...signedIn, { id, firstName, lastName }];
     setSignedIn(updatedMembers);
   };
@@ -57,21 +79,17 @@ const SigninToClass: FC<SignInToClassProps> = ({
       {canSignIn === AccessStatus.authorised ? (
         <React.Fragment>
           <SigninToClassForm
-            members={notSignedIn}
-            handleSignin={handleSignin}
+            setSigninInput={setSigninInput}
+            signinInput={signinInput}
           />
-          {signedIn.length > 0 && (
-            <div>
-              <h3>Members signed in to class</h3>
-              <ul>
-                {signedIn.map((m) => (
-                  <li key={`signedIn-${m.id}`}>
-                    {m.firstName} {m.lastName}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+
+          <FilteredMembers
+            potentialMembers={potentialMembers}
+            handleSignin={handleSignin}
+            signinInput={signinInput}
+          />
+
+          {signedIn.length > 0 && <SignedIn members={signedIn} />}
         </React.Fragment>
       ) : (
         <p>Cannot sign in to this class yet</p>
