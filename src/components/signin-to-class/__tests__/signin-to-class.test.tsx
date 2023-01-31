@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { AccessStatus } from "../../specific-class/specific-class.component";
 import SigninToClass, {
-  SignInToClassProps,
+  SigninToClassProps,
 } from "../signin-to-class.component";
 
-const setup = ({ dayOfWeek, time, canSignIn }: SignInToClassProps) => {
+const setup = ({ dayOfWeek, time, canSignIn }: SigninToClassProps) => {
   render(
     <SigninToClass dayOfWeek={dayOfWeek} time={time} canSignIn={canSignIn} />
   );
