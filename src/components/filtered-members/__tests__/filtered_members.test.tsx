@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import FilteredMembers from "../filtered-members.component";
 import { Member } from "../../../utils/memberUtils";
 
@@ -44,5 +44,23 @@ describe("filtered members", () => {
     expect(screen.getByText(/mary smith/i)).toBeInTheDocument();
     expect(screen.getByText(/trevor small/i)).toBeInTheDocument();
     expect(screen.getByText(/billy tubbins/i)).toBeInTheDocument();
+  });
+
+  it("calls handleSignin when filtered member is clicked", () => {
+    setup();
+    const link = screen.getByText(/billy tubbins/i);
+    fireEvent.click(link);
+    expect(mockHandleSignin).toBeCalledTimes(1);
+  });
+
+  it("displays when no users are found", () => {
+    render(
+      <FilteredMembers
+        potentialMembers={[]}
+        handleSignin={mockHandleSignin}
+        signinInput={"blah"}
+      />
+    );
+    expect(screen.getByText(/no members found/i)).toBeInTheDocument();
   });
 });
