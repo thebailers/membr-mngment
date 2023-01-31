@@ -1,8 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { AccessStatus } from "../../specific-class/specific-class.component";
-import SigninToClassForm from "../signin-to-class-form.component";
 import SigninToClass, {
-  SignInToClassProps,
+  SigninToClassProps,
 } from "../signin-to-class.component";
 
 const setupProps = {
@@ -11,7 +10,7 @@ const setupProps = {
   canSignIn: AccessStatus.authorised,
 };
 
-const setup = ({ dayOfWeek, time, canSignIn }: SignInToClassProps) => {
+const setup = ({ dayOfWeek, time, canSignIn }: SigninToClassProps) => {
   const utils = render(
     <SigninToClass dayOfWeek={dayOfWeek} time={time} canSignIn={canSignIn} />
   );
