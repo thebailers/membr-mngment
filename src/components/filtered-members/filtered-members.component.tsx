@@ -4,13 +4,13 @@ import { Member } from "../../utils/memberUtils";
 type FilteredMembersProps = {
   potentialMembers: Member[];
   handleSignin: (member: Member) => void;
-  signinInput: string;
+  userHasTyped: boolean;
 };
 
 const FilteredMembers: FC<FilteredMembersProps> = ({
   potentialMembers,
   handleSignin,
-  signinInput,
+  userHasTyped,
 }) => {
   return (
     <>
@@ -25,7 +25,7 @@ const FilteredMembers: FC<FilteredMembersProps> = ({
         </ul>
       )}
 
-      {signinInput && !potentialMembers.length && <p>No members found</p>}
+      {userHasTyped && !potentialMembers.length && <p>No members found</p>}
     </>
   );
 };

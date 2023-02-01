@@ -86,7 +86,7 @@ const SigninToClass: FC<SigninToClassProps> = ({
           <FilteredMembers
             potentialMembers={potentialMembers}
             handleSignin={handleSignin}
-            signinInput={signinInput}
+            userHasTyped={Boolean(signinInput.length)}
           />
 
           {signedIn.length > 0 && <SignedIn members={signedIn} />}
