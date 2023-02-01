@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { classesData } from "../../utils/classUtils";
+import { classesData } from "../../utils/class.utils";
 import {
   daysOfWeekArray,
   getWeekdayNumberFromURL,

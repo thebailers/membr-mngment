@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import FilteredMembers from "../filtered-members.component";
-import { Member } from "../../../utils/memberUtils";
+import { Member } from "../../../utils/member.utils";
 
 const mockHandleSignin = jest.fn();
 

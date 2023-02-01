@@ -1,4 +1,4 @@
-import { Member } from "./memberUtils";
+import { Member } from "./member.utils";
 
 export const daysOfWeekArray: string[] = [
   "Sunday",

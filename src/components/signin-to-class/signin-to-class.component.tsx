@@ -8,7 +8,7 @@ import FilteredMembers from "../filtered-members/filtered-members.component";
 import { AccessStatus } from "../specific-class/specific-class.component";
 
 import { NotesContainer, NotesHeader, NotesList } from "../../global-styles";
-import { Member, memberData } from "../../utils/memberUtils";
+import { Member, memberData } from "../../utils/member.utils";
 import { removeDuplicates, duplicateObjectInArrays } from "../../utils/utils";
 
 export type SigninToClassProps = {

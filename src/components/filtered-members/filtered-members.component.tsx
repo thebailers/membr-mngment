@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Member } from "../../utils/memberUtils";
+import { Member } from "../../utils/member.utils";
 
 type FilteredMembersProps = {
   potentialMembers: Member[];

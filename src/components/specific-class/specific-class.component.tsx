@@ -4,7 +4,7 @@ import SigninToClass from "../signin-to-class/signin-to-class.component";
 
 import { capitaliseFirstLetter, daysOfWeekArray } from "../../utils/utils";
 import { ClassDetail } from "../class-list/class-list.component";
-import { classesData } from "../../utils/classUtils";
+import { classesData } from "../../utils/class.utils";
 import { getClassSigninTimes } from "../../utils/dateUtils";
 
 export enum AccessStatus {
