@@ -15,9 +15,14 @@ const Header = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
+          <li>
+            <Link to="/auth">Sign up</Link>
+          </li>
           {currentDay && (
             <li>
-              <Link to={`/classes/${currentDay}`}>Classes</Link>
+              <Link to={`/classes/${currentDay}`}>
+                Classes [TODO: Conditional: if logged in]
+              </Link>
             </li>
           )}
         </ul>
