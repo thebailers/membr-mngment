@@ -32,7 +32,7 @@ const setup = () => {
     <FilteredMembers
       potentialMembers={mockPotentialMembers}
       handleSignin={mockHandleSignin}
-      signinInput={""}
+      userHasTyped={true}
     />
   );
 };
@@ -58,7 +58,7 @@ describe("filtered members", () => {
       <FilteredMembers
         potentialMembers={[]}
         handleSignin={mockHandleSignin}
-        signinInput={"blah"}
+        userHasTyped={true}
       />
     );
     expect(screen.getByText(/no members found/i)).toBeInTheDocument();
