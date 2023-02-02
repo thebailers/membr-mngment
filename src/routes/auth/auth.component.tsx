@@ -4,6 +4,7 @@ import { FirebaseError } from "firebase/app";
 import ErrorMessage from "../../error-message/error-message.component";
 
 import { signUpUserEmailPassword } from "../../utils/firebase/firebase.utils";
+import { friendlyFirebaseError } from "../../utils/firebase/firebase-errors";
 
 const Auth = () => {
   const [emailInput, setEmailInput] = useState<string>("");
@@ -22,7 +23,8 @@ const Auth = () => {
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         console.log("catch err: ", error.message);
-        setAuthError(error.message);
+        console.log("catch err: ", error.code);
+        setAuthError(friendlyFirebaseError(error.code));
       } else {
         console.log("unknown err: ", error);
         setAuthError("Something went wrong - please try again");
