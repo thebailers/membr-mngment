@@ -1,11 +1,13 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { Link } from "react-router-dom";
 
-// blue #63B0CD
-// dark grey #39393A
-// dusky gold #9B9B93
-// lilac #E9D2F4
-// mid gold #C1B098
+export const colors: { [key: string]: string } = {
+  blue: "#63B0CD",
+  darkGrey: "#39393A",
+  duskyGold: "#9B9B93",
+  lilac: "#E9D2F4",
+  midGold: "#C1B098",
+};
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -13,7 +15,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: #39393A;
+    background-color: ${colors.darkGrey};
     color: #fff;
     font-size: calc(10px + 2vmin);
     margin: 0;

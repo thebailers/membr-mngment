@@ -5,6 +5,8 @@ import ErrorMessage from "../../error-message/error-message.component";
 
 import { signUpUserEmailPassword } from "../../utils/firebase/firebase.utils";
 import { friendlyFirebaseError } from "../../utils/firebase/firebase-errors";
+import Input from "../../components/helpers/form/input/input.component";
+import Button from "../../components/helpers/form/button/button.component";
 
 const Auth = () => {
   const [emailInput, setEmailInput] = useState<string>("");
@@ -36,18 +38,22 @@ const Auth = () => {
     <>
       {authError && <ErrorMessage message={authError} />}
       <form onSubmit={handleSubmit}>
-        <input
+        <Input
           type="text"
           value={emailInput}
-          onChange={(e) => setEmailInput(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setEmailInput(e.target.value)
+          }
         />
 
-        <input
+        <Input
           type="password"
           value={passwordInput}
-          onChange={(e) => setPasswordInput(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPasswordInput(e.target.value)
+          }
         />
-        <button type="submit">Sign up</button>
+        <Button type="submit">Sign up</Button>
       </form>
     </>
   );

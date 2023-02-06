@@ -1,11 +1,13 @@
 import { FC } from "react";
 
+import { Error } from "./error.styles";
+
 type ErrorMessageProps = {
   message: string;
 };
 
 const ErrorMessage: FC<ErrorMessageProps> = ({ message }) => {
-  return <div className="error">{message}</div>;
+  return <Error className="error">{message}</Error>;
 };
 
 export default ErrorMessage;
