@@ -17,7 +17,6 @@ export const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${colors.darkGrey};
     color: #fff;
-    font-size: calc(10px + 2vmin);
     margin: 0;
     min-height: 100vh;
     padding: 20px 40px;
@@ -70,14 +69,14 @@ export const NotesContainer = styled.div`
 
 export const NotesHeader = styled.h3`
   color: #b3b3b3;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
   margin-bottom: 10px;
 `;
 
 export const NotesList = styled.li`
   color: #b3b3b3;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   margin-left: 10px;
 `;
