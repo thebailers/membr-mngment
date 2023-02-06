@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FirebaseError } from "firebase/app";
 
-import ErrorMessage from "../../error-message/error-message.component";
+import ErrorMessage from "../../components/helpers/error-message/error-message.component";
 
 import { signUpUserEmailPassword } from "../../utils/firebase/firebase.utils";
 import { friendlyFirebaseError } from "../../utils/firebase/firebase-errors";
@@ -19,6 +19,13 @@ const Auth = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // prevent submission with empty inputs
+    if (!emailInput || !passwordInput) {
+      setAuthError("Enter an email address & password");
+      return;
+    }
+
     try {
       const signUp = await signUpUserEmailPassword(emailInput, passwordInput);
       console.log("try: ", signUp);
