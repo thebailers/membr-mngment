@@ -45,7 +45,10 @@ const Auth = () => {
     <>
       {authError && <ErrorMessage message={authError} />}
       <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
         <Input
+          id="email"
+          name="email"
           type="text"
           value={emailInput}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -53,7 +56,10 @@ const Auth = () => {
           }
         />
 
+        <label htmlFor="password">Password</label>
         <Input
+          id="password"
+          name="password"
           type="password"
           value={passwordInput}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
