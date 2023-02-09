@@ -31,6 +31,7 @@ const Auth = () => {
       console.log("try: ", signUp);
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
+        console.log(error);
         console.log("catch err: ", error.message);
         console.log("catch err: ", error.code);
         setAuthError(friendlyFirebaseError(error.code));
