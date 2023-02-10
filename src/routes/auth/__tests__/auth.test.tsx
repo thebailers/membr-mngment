@@ -5,10 +5,6 @@ import { signUpUserEmailPassword as mockSignUpUserEmailPassword } from "../../..
 
 jest.mock("../../../utils/firebase/firebase.utils");
 
-// jest.mock("../../../utils/firebase/firebase.utils", () => {
-//   return jest.fn();
-// });
-
 const setup = () => {
   const utils = render(<Auth />);
   const inputEmail: HTMLInputElement = screen.getByLabelText(/email/i);
@@ -40,15 +36,15 @@ describe("auth component", () => {
   it("calls the firebase sign up with email/password api when email & password present", () => {
     const { inputPassword, inputEmail, button } = setup();
     fireEvent.change(inputEmail, { target: { value: "billytubbins" } });
-    fireEvent.change(inputPassword, { target: { value: "12345" } });
+    fireEvent.change(inputPassword, { target: { value: "123456" } });
     fireEvent.click(button);
     expect(mockSignUpUserEmailPassword).toBeCalledTimes(1);
   });
 
   it("displays relevant error message when email address already in use", () => {
     const { inputPassword, inputEmail, button } = setup();
-    fireEvent.change(inputEmail, { target: { value: "billytubbins" } });
-    fireEvent.change(inputPassword, { target: { value: "12345" } });
+    fireEvent.change(inputEmail, { target: { value: "billy@tubbins.co.uk" } });
+    fireEvent.change(inputPassword, { target: { value: "123456" } });
     (mockSignUpUserEmailPassword as jest.Mock).mockImplementation(() => {
       throw new FirebaseError(
         "auth/email-already-in-use",
@@ -57,5 +53,37 @@ describe("auth component", () => {
     });
     fireEvent.click(button);
     expect(screen.getByText(/email address in use/i)).toBeInTheDocument();
+  });
+
+  it("displays relevant error message when email address invalid", () => {
+    const { inputPassword, inputEmail, button } = setup();
+    fireEvent.change(inputEmail, { target: { value: "billytubbins" } });
+    fireEvent.change(inputPassword, { target: { value: "123456" } });
+    (mockSignUpUserEmailPassword as jest.Mock).mockImplementation(() => {
+      throw new FirebaseError(
+        "auth/invalid-email",
+        "Firebase: Error (auth/auth/invalid-email)."
+      );
+    });
+    fireEvent.click(button);
+    expect(
+      screen.getByText(/enter a valid email address/i)
+    ).toBeInTheDocument();
+  });
+
+  it("displays relevant error message when password invalid", () => {
+    const { inputPassword, inputEmail, button } = setup();
+    fireEvent.change(inputEmail, { target: { value: "billytubbins" } });
+    fireEvent.change(inputPassword, { target: { value: "123456" } });
+    (mockSignUpUserEmailPassword as jest.Mock).mockImplementation(() => {
+      throw new FirebaseError(
+        "auth/invalid-password",
+        "Firebase: Error (auth/invalid-password)."
+      );
+    });
+    fireEvent.click(button);
+    expect(
+      screen.getByText(/password must be at least 6 characters in length/i)
+    ).toBeInTheDocument();
   });
 });
