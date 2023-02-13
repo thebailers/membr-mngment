@@ -69,7 +69,7 @@ const Auth = () => {
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <div className="hint">Password must me 6 characters or more</div>
+          <div className="hint">Password must be 6 characters or more</div>
           {errors.password && (
             <InlineError>{errors.password.message}</InlineError>
           )}
