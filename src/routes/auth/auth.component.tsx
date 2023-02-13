@@ -36,25 +36,18 @@ const Auth = () => {
 
   console.log("errors", errors);
 
-  const onSubmit: SubmitHandler<SignUpSchemaType> = async (data) => {
-    console.log(data);
-    // e.preventDefault();
-    // prevent submission with empty inputs
-    // if (!emailInput || !passwordInput) {
-    //   setAuthError("Enter an email address & password");
-    //   return;
-    // }
-    // try {
-    //   const authorisedUser = await signUpUserEmailPassword(
-    //     emailInput,
-    //     passwordInput
-    //   );
-    //   // store signed in user 'authorisedUser' in UserContext
-    // } catch (error: unknown) {
-    //   if (error instanceof FirebaseError)
-    //     setAuthError(friendlyFirebaseError(error.code));
-    //   else setAuthError("Something went wrong - please try again");
-    // }
+  const onSubmit: SubmitHandler<SignUpSchemaType> = async ({
+    email,
+    password,
+  }) => {
+    try {
+      const authorisedUser = await signUpUserEmailPassword(email, password);
+      // store signed in user 'authorisedUser' in UserContext
+    } catch (error: unknown) {
+      if (error instanceof FirebaseError)
+        setAuthError(friendlyFirebaseError(error.code));
+      else setAuthError("Something went wrong - please try again");
+    }
   };
 
   const handleAnyInputChange = () => {
@@ -80,7 +73,11 @@ const Auth = () => {
           {errors.password && (
             <InlineError>{errors.password.message}</InlineError>
           )}
-          <input {...register("password")} disabled={isSubmitting} />
+          <input
+            {...register("password")}
+            type="password"
+            disabled={isSubmitting}
+          />
         </div>
 
         <div>
@@ -88,7 +85,11 @@ const Auth = () => {
           {errors.confirmPassword && (
             <InlineError>{errors.confirmPassword.message}</InlineError>
           )}
-          <input {...register("confirmPassword")} disabled={isSubmitting} />
+          <input
+            {...register("confirmPassword")}
+            type="password"
+            disabled={isSubmitting}
+          />
         </div>
 
         <Button type="submit" disabled={isSubmitting}>
