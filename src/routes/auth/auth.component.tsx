@@ -34,8 +34,6 @@ const Auth = () => {
     resolver: zodResolver(SignUpSchema),
   });
 
-  console.log("errors", errors);
-
   const onSubmit: SubmitHandler<SignUpSchemaType> = async ({
     email,
     password,
@@ -62,6 +60,7 @@ const Auth = () => {
           <label htmlFor="email">Email</label>
           {errors.email && <InlineError>{errors.email.message}</InlineError>}
           <input
+            id="email"
             placeholder="enter your email"
             {...register("email")}
             disabled={isSubmitting}
@@ -74,6 +73,7 @@ const Auth = () => {
             <InlineError>{errors.password.message}</InlineError>
           )}
           <input
+            id="password"
             {...register("password")}
             type="password"
             disabled={isSubmitting}
@@ -86,6 +86,7 @@ const Auth = () => {
             <InlineError>{errors.confirmPassword.message}</InlineError>
           )}
           <input
+            id="confirmPassword"
             {...register("confirmPassword")}
             type="password"
             disabled={isSubmitting}
