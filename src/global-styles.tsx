@@ -39,6 +39,20 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  label {
+    display: block;
+    margin-bottom: 7px;
+  }
+
+  input {
+    margin-bottom: 25px;
+  }
+
+  .hint {
+    color: ${colors.duskyGold};
+    margin-bottom: 7px;
+  }
+
 `;
 
 type AnchorProps = {

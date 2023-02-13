@@ -5,6 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import ErrorMessage from "../../components/helpers/error-message/error-message.component";
 
+import { InlineError } from "../../components/helpers/error-message/error.styles";
+
 import { signUpUserEmailPassword } from "../../utils/firebase/firebase.utils";
 import { friendlyFirebaseError } from "../../utils/firebase/firebase-errors";
 import Input from "../../components/helpers/form/input/input.component";
@@ -65,7 +67,7 @@ const Auth = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="email">Email</label>
-          {errors.email && <div className="error">{errors.email.message}</div>}
+          {errors.email && <InlineError>{errors.email.message}</InlineError>}
           <input
             placeholder="enter your email"
             {...register("email")}
@@ -76,7 +78,7 @@ const Auth = () => {
           <label htmlFor="password">Password</label>
           <div className="hint">Password must me 6 characters or more</div>
           {errors.password && (
-            <div className="error">{errors.password.message}</div>
+            <InlineError>{errors.password.message}</InlineError>
           )}
           <input {...register("password")} disabled={isSubmitting} />
         </div>
@@ -84,7 +86,7 @@ const Auth = () => {
         <div>
           <label htmlFor="confirmPassword">Confirm password</label>
           {errors.confirmPassword && (
-            <div className="error">{errors.confirmPassword.message}</div>
+            <InlineError>{errors.confirmPassword.message}</InlineError>
           )}
           <input {...register("confirmPassword")} disabled={isSubmitting} />
         </div>
