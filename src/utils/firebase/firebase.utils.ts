@@ -1,7 +1,11 @@
 import { initializeApp } from "firebase/app";
 
 // auth
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,4 +30,9 @@ const auth = getAuth(app);
 export const signUpUserEmailPassword = (email: string, password: string) => {
   if (!email || !password) return;
   return createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const signInUserPassword = (email: string, password: string) => {
+  if (!email || !password) return;
+  return signInWithEmailAndPassword(auth, email, password);
 };
