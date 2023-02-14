@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import ErrorMessage from "../../components/helpers/error-message/error-message.component";
 
+import { AuthWrapper } from "./auth.styles";
 import { InlineError } from "../../components/helpers/error-message/error.styles";
 
 import { signUpUserEmailPassword } from "../../utils/firebase/firebase.utils";
@@ -19,11 +20,6 @@ const Auth = () => {
   // const [emailInput, setEmailInput] = useState<string>("");
   // const [passwordInput, setPasswordInput] = useState<string>("");
   const [authError, setAuthError] = useState<string>("");
-
-  // useEffect(() => {
-  //   // reset auth error when user input detected
-  //   setAuthError("");
-  // }, [emailInput, passwordInput]);
 
   // react hook form setup
   const {
@@ -53,16 +49,17 @@ const Auth = () => {
   };
 
   return (
-    <>
+    <AuthWrapper>
       {authError && <ErrorMessage message={authError} />}
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div>
           <label htmlFor="email">Email</label>
           {errors.email && <InlineError>{errors.email.message}</InlineError>}
-          <input
-            id="email"
+          <Input
+            label="email"
+            type="email"
             placeholder="enter your email"
-            {...register("email")}
+            register={register}
             disabled={isSubmitting}
           />
         </div>
@@ -72,9 +69,10 @@ const Auth = () => {
           {errors.password && (
             <InlineError>{errors.password.message}</InlineError>
           )}
-          <input
-            id="password"
-            {...register("password")}
+          <Input
+            label="password"
+            placeholder="enter your password"
+            register={register}
             type="password"
             disabled={isSubmitting}
           />
@@ -85,9 +83,10 @@ const Auth = () => {
           {errors.confirmPassword && (
             <InlineError>{errors.confirmPassword.message}</InlineError>
           )}
-          <input
-            id="confirmPassword"
-            {...register("confirmPassword")}
+          <Input
+            label="confirmPassword"
+            placeholder="confirm your password"
+            register={register}
             type="password"
             disabled={isSubmitting}
           />
@@ -97,7 +96,7 @@ const Auth = () => {
           Sign up
         </Button>
       </form>
-    </>
+    </AuthWrapper>
   );
 };
 
