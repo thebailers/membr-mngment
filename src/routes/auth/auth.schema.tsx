@@ -7,7 +7,7 @@ export const SignUpSchema = z
   .object({
     email: z
       .string()
-      .email("Invalid email")
+      .email(errorMessageMap.emailAddressInvalid)
       .min(1, errorMessageMap.emailAddressEmpty),
     password: z.string().min(6, errorMessageMap.passwordLength),
     confirmPassword: z.string().min(6, errorMessageMap.confirmPasswordLength),

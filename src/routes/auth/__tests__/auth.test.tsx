@@ -1,14 +1,7 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  act,
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { FirebaseError } from "firebase/app";
 import Auth from "../auth.component";
 import { signUpUserEmailPassword as mockSignUpUserEmailPassword } from "../../../utils/firebase/firebase.utils";
-import userEvent from "@testing-library/user-event";
 
 jest.mock("../../../utils/firebase/firebase.utils");
 
@@ -34,7 +27,9 @@ describe("auth component", () => {
   it("displays an error when attempting sign in with no username/password input", async () => {
     const { button } = setup();
     fireEvent.click(button);
-    expect(await screen.findByText(/invalid email/i)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/enter a valid email address/i)
+    ).toBeInTheDocument();
     expect(
       await screen.findByText(/password must be a minimum of 6 characters/i)
     ).toBeInTheDocument();
@@ -76,50 +71,31 @@ describe("auth component", () => {
     expect(mockSignUpUserEmailPassword).not.toBeCalled();
   });
 
-  // it("displays relevant error message when email address already in use", () => {
-  //   const { inputPassword, inputConfirmPassword, inputEmail, button } = setup();
-  //   fireEvent.change(inputEmail, { target: { value: "billy@tubbins.co.uk" } });
-  //   fireEvent.change(inputPassword, { target: { value: "123456" } });
-  //   fireEvent.change(inputConfirmPassword, { target: { value: "123456" } });
-  //   (mockSignUpUserEmailPassword as jest.Mock).mockImplementation(() => {
-  //     throw new FirebaseError(
-  //       "auth/email-already-in-use",
-  //       "Firebase: Error (auth/email-already-in-use)."
-  //     );
-  //   });
-  //   fireEvent.click(button);
-  //   expect(screen.getByText(/email address in use/i)).toBeInTheDocument();
-  // });
+  it("displays relevant error message when email address already in use", async () => {
+    const { inputPassword, inputConfirmPassword, inputEmail, button } = setup();
+    fireEvent.change(inputEmail, { target: { value: "billy@tubbins.co.uk" } });
+    fireEvent.change(inputPassword, { target: { value: "123456" } });
+    fireEvent.change(inputConfirmPassword, { target: { value: "123456" } });
+    (mockSignUpUserEmailPassword as jest.Mock).mockImplementation(() => {
+      throw new FirebaseError(
+        "auth/email-already-in-use",
+        "Firebase: Error (auth/email-already-in-use)."
+      );
+    });
+    fireEvent.click(button);
+    expect(
+      await screen.findByText(/email address in use/i)
+    ).toBeInTheDocument();
+  });
 
-  // it("displays relevant error message when email address invalid", () => {
-  //   const { inputPassword, inputEmail, button } = setup();
-  //   fireEvent.change(inputEmail, { target: { value: "billytubbins" } });
-  //   fireEvent.change(inputPassword, { target: { value: "123456" } });
-  //   (mockSignUpUserEmailPassword as jest.Mock).mockImplementation(() => {
-  //     throw new FirebaseError(
-  //       "auth/invalid-email",
-  //       "Firebase: Error (auth/auth/invalid-email)."
-  //     );
-  //   });
-  //   fireEvent.click(button);
-  //   expect(
-  //     screen.getByText(/enter a valid email address/i)
-  //   ).toBeInTheDocument();
-  // });
-
-  // it("displays relevant error message when password invalid", () => {
-  //   const { inputPassword, inputEmail, button } = setup();
-  //   fireEvent.change(inputEmail, { target: { value: "billytubbins" } });
-  //   fireEvent.change(inputPassword, { target: { value: "123456" } });
-  //   (mockSignUpUserEmailPassword as jest.Mock).mockImplementation(() => {
-  //     throw new FirebaseError(
-  //       "auth/invalid-password",
-  //       "Firebase: Error (auth/invalid-password)."
-  //     );
-  //   });
-  //   fireEvent.click(button);
-  //   expect(
-  //     screen.getByText(/password must be at least 6 characters in length/i)
-  //   ).toBeInTheDocument();
-  // });
+  it("displays relevant error message when email address invalid", async () => {
+    const { inputPassword, inputConfirmPassword, inputEmail, button } = setup();
+    fireEvent.change(inputEmail, { target: { value: "billytubbins" } });
+    fireEvent.change(inputPassword, { target: { value: "123456" } });
+    fireEvent.change(inputConfirmPassword, { target: { value: "123456" } });
+    fireEvent.click(button);
+    expect(
+      await screen.findByText(/enter a valid email address/i)
+    ).toBeInTheDocument();
+  });
 });
