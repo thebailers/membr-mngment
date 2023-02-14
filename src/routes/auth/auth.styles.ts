@@ -5,12 +5,17 @@ export const AuthWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    > div,
+    button {
+      width: 60%;
+    }
   }
 
   input,
   label,
   button {
-    display: flex;
-    width: 400px;
+    display: block;
+    width: 100%;
   }
 `;
