@@ -1,7 +1,16 @@
 import styled from "styled-components";
 
 export const AuthWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input,
+  label,
+  button {
+    display: flex;
+    width: 400px;
+  }
 `;

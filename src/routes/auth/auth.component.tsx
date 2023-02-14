@@ -17,8 +17,6 @@ import Button from "../../components/helpers/form/button/button.component";
 import { SignUpSchema, SignUpSchemaType } from "./auth.schema";
 
 const Auth = () => {
-  // const [emailInput, setEmailInput] = useState<string>("");
-  // const [passwordInput, setPasswordInput] = useState<string>("");
   const [authError, setAuthError] = useState<string>("");
 
   // react hook form setup
@@ -44,6 +42,7 @@ const Auth = () => {
     }
   };
 
+  // todo: test to cover this
   const handleAnyInputChange = () => {
     setAuthError("");
   };
