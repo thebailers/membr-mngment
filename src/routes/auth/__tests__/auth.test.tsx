@@ -47,8 +47,7 @@ describe("auth component", () => {
   });
 
   it("calls the firebase sign up with email/password api when email, password & confirm password present", async () => {
-    const { debug, inputPassword, inputConfirmPassword, inputEmail, button } =
-      setup();
+    const { inputPassword, inputConfirmPassword, inputEmail, button } = setup();
     fireEvent.change(inputEmail, { target: { value: "billy@tubbins.com" } });
     fireEvent.change(inputPassword, { target: { value: "123456" } });
     fireEvent.change(inputConfirmPassword, { target: { value: "123456" } });

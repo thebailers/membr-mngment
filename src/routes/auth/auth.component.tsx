@@ -42,11 +42,6 @@ const Auth = () => {
     }
   };
 
-  // todo: test to cover this
-  const handleAnyInputChange = () => {
-    if (authError) setAuthError("");
-  };
-
   return (
     <AuthWrapper>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -55,12 +50,11 @@ const Auth = () => {
           <label htmlFor="email">Email</label>
           {errors.email && <InlineError>{errors.email.message}</InlineError>}
           <Input
+            {...register("email")}
             id="email"
             type="email"
             placeholder="enter your email"
-            {...register("email")}
             disabled={isSubmitting}
-            onChange={handleAnyInputChange}
           />
         </div>
         <div>
@@ -70,12 +64,11 @@ const Auth = () => {
             <InlineError>{errors.password.message}</InlineError>
           )}
           <Input
+            {...register("password")}
             id="password"
             placeholder="enter your password"
-            {...register("password")}
             type="password"
             disabled={isSubmitting}
-            onChange={handleAnyInputChange}
           />
         </div>
 
@@ -85,12 +78,11 @@ const Auth = () => {
             <InlineError>{errors.confirmPassword.message}</InlineError>
           )}
           <Input
+            {...register("confirmPassword")}
             id="confirmPassword"
             placeholder="confirm your password"
-            {...register("confirmPassword")}
             type="password"
             disabled={isSubmitting}
-            onChange={handleAnyInputChange}
           />
         </div>
 
