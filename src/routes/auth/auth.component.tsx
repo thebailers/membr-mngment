@@ -44,13 +44,13 @@ const Auth = () => {
 
   // todo: test to cover this
   const handleAnyInputChange = () => {
-    setAuthError("");
+    if (authError) setAuthError("");
   };
 
   return (
     <AuthWrapper>
-      {authError && <ErrorMessage message={authError} />}
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        {authError && <ErrorMessage message={authError} />}
         <div>
           <label htmlFor="email">Email</label>
           {errors.email && <InlineError>{errors.email.message}</InlineError>}
@@ -60,6 +60,7 @@ const Auth = () => {
             placeholder="enter your email"
             register={register}
             disabled={isSubmitting}
+            handleChange={handleAnyInputChange}
           />
         </div>
         <div>
@@ -74,6 +75,7 @@ const Auth = () => {
             register={register}
             type="password"
             disabled={isSubmitting}
+            handleChange={handleAnyInputChange}
           />
         </div>
 
@@ -88,6 +90,7 @@ const Auth = () => {
             register={register}
             type="password"
             disabled={isSubmitting}
+            handleChange={handleAnyInputChange}
           />
         </div>
 

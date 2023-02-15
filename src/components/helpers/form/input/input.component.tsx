@@ -13,6 +13,7 @@ type InputProps = {
   register: UseFormRegister<IFormValues>;
   placeholder: string;
   disabled: boolean;
+  handleChange?: () => void;
 };
 
 const Input = ({
@@ -21,6 +22,7 @@ const Input = ({
   register,
   placeholder,
   disabled,
+  handleChange,
 }: InputProps) => {
   return (
     <StyledInput
@@ -28,6 +30,7 @@ const Input = ({
       placeholder={placeholder}
       disabled={disabled}
       type={type}
+      onChange={handleChange}
     />
   );
 };
