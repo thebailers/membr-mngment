@@ -47,7 +47,8 @@ describe("auth component", () => {
   });
 
   it("calls the firebase sign up with email/password api when email, password & confirm password present", async () => {
-    const { inputPassword, inputConfirmPassword, inputEmail, button } = setup();
+    const { debug, inputPassword, inputConfirmPassword, inputEmail, button } =
+      setup();
     fireEvent.change(inputEmail, { target: { value: "billy@tubbins.com" } });
     fireEvent.change(inputPassword, { target: { value: "123456" } });
     fireEvent.change(inputConfirmPassword, { target: { value: "123456" } });
@@ -72,16 +73,16 @@ describe("auth component", () => {
   });
 
   it("displays relevant error message when email address already in use", async () => {
-    const { inputPassword, inputConfirmPassword, inputEmail, button } = setup();
-    fireEvent.change(inputEmail, { target: { value: "billy@tubbins.co.uk" } });
-    fireEvent.change(inputPassword, { target: { value: "123456" } });
-    fireEvent.change(inputConfirmPassword, { target: { value: "123456" } });
     (mockSignUpUserEmailPassword as jest.Mock).mockImplementation(() => {
       throw new FirebaseError(
         "auth/email-already-in-use",
         "Firebase: Error (auth/email-already-in-use)."
       );
     });
+    const { inputPassword, inputConfirmPassword, inputEmail, button } = setup();
+    fireEvent.change(inputEmail, { target: { value: "billy@tubbins.co.uk" } });
+    fireEvent.change(inputPassword, { target: { value: "123456" } });
+    fireEvent.change(inputConfirmPassword, { target: { value: "123456" } });
     fireEvent.click(button);
     expect(
       await screen.findByText(/email address in use/i)

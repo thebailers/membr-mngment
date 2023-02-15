@@ -7,10 +7,10 @@ import ErrorMessage from "../../components/helpers/error-message/error-message.c
 
 import { AuthWrapper } from "./auth.styles";
 import { InlineError } from "../../components/helpers/error-message/error.styles";
+import { Input } from "../../components/helpers/form/input/input.styles";
 
 import { signUpUserEmailPassword } from "../../utils/firebase/firebase.utils";
 import { friendlyFirebaseError } from "../../utils/firebase/firebase-errors";
-import Input from "../../components/helpers/form/input/input.component";
 import Button from "../../components/helpers/form/button/button.component";
 
 // form validation schema
@@ -55,12 +55,12 @@ const Auth = () => {
           <label htmlFor="email">Email</label>
           {errors.email && <InlineError>{errors.email.message}</InlineError>}
           <Input
-            label="email"
+            id="email"
             type="email"
             placeholder="enter your email"
-            register={register}
+            {...register("email")}
             disabled={isSubmitting}
-            handleChange={handleAnyInputChange}
+            onChange={handleAnyInputChange}
           />
         </div>
         <div>
@@ -70,12 +70,12 @@ const Auth = () => {
             <InlineError>{errors.password.message}</InlineError>
           )}
           <Input
-            label="password"
+            id="password"
             placeholder="enter your password"
-            register={register}
+            {...register("password")}
             type="password"
             disabled={isSubmitting}
-            handleChange={handleAnyInputChange}
+            onChange={handleAnyInputChange}
           />
         </div>
 
@@ -85,12 +85,12 @@ const Auth = () => {
             <InlineError>{errors.confirmPassword.message}</InlineError>
           )}
           <Input
-            label="confirmPassword"
+            id="confirmPassword"
             placeholder="confirm your password"
-            register={register}
+            {...register("confirmPassword")}
             type="password"
             disabled={isSubmitting}
-            handleChange={handleAnyInputChange}
+            onChange={handleAnyInputChange}
           />
         </div>
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../../../global-styles";
 
-export const StyledInput = styled.input`
+export const Input = styled.input`
   border: 1px solid lightgrey;
   border-radius: 4px;
   color: ${colors.darkGrey};
