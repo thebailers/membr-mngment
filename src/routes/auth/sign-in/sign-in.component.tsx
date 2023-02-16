@@ -75,17 +75,6 @@ const SignIn = () => {
         type="password"
         disabled={isSubmitting}
         error={errors.password?.message}
-        hint={errorMessageMap.passwordHint}
-      />
-      <Input
-        hookValue="confirmPassword"
-        register={register}
-        label="Confirm password"
-        id="confirmPassword"
-        placeholder="confirm your password"
-        type="password"
-        disabled={isSubmitting}
-        error={errors.confirmPassword?.message}
       />
 
       <Button type="submit" disabled={isSubmitting}>
