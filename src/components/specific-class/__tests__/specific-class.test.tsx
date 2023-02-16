@@ -1,6 +1,6 @@
 import { screen, act } from "@testing-library/react";
 import { Routes, Route } from "react-router-dom";
-import { renderWithRouter } from "../../../testUtils";
+import { renderWithRouter } from "../../../utils/testUtils";
 
 import SpecificClass from "../specific-class.component";
 

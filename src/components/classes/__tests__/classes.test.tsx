@@ -4,7 +4,7 @@ import Classes from "../classes.component";
 
 import { daysOfWeekArray } from "../../../utils/utils";
 
-import { renderWithRouter } from "../../../testUtils";
+import { renderWithRouter } from "../../../utils/testUtils";
 
 const setup = (route: string) =>
   renderWithRouter(

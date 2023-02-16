@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import { Routes, Route } from "react-router-dom";
 import ClassList from "../class-list.component";
-import { renderWithRouter } from "../../../testUtils";
+import { renderWithRouter } from "../../../utils/testUtils";
 
 import {
   classTimes,
