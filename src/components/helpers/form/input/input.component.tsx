@@ -3,18 +3,25 @@ import { UseFormRegister, Path } from "react-hook-form";
 
 import { InlineError } from "../../error-message/error.styles";
 
-interface IFormValues {
+// type IFormValues = ISignIn | ISignUp;
+
+// interface ISignIn {
+//   email: string;
+//   password: string;
+// }
+
+interface ISignUp {
   email: string;
   password: string;
   confirmPassword: string;
 }
 
 type InputProps = {
-  hookValue: Path<IFormValues>;
+  hookValue: Path<ISignUp>;
   id: string;
   label: string;
   type: string;
-  register: UseFormRegister<IFormValues>;
+  register: UseFormRegister<ISignUp>;
   placeholder: string;
   disabled: boolean;
   handleChange?: () => void;

@@ -5,14 +5,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import ErrorMessage from "../../../components/helpers/error-message/error-message.component";
 import Button from "../../../components/helpers/form/button/button.component";
-import Input from "../../../components/helpers/form/input/input.component";
+
+import { StyledInput as Input } from "../../../components/helpers/form/input/input.styles";
 
 import { signInUserPassword } from "../../../utils/firebase/firebase.utils";
 import { friendlyFirebaseError } from "../../../utils/firebase/firebase-errors";
-import { errorMessageMap } from "../../../utils/error.utils";
 
 // form validation schema
-import { SignUpSchema, SignUpSchemaType } from "../auth.schema";
+import { SignInSchema, SignInSchemaType } from "../auth.schema";
+import { InlineError } from "../../../components/helpers/error-message/error.styles";
 
 const SignIn = () => {
   const [authError, setAuthError] = useState<string>("");
@@ -23,8 +24,8 @@ const SignIn = () => {
     watch,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SignUpSchemaType>({
-    resolver: zodResolver(SignUpSchema),
+  } = useForm<SignInSchemaType>({
+    resolver: zodResolver(SignInSchema),
   });
 
   // const watchFields = watch(["email", "password", "confirmPassword"]);
@@ -37,12 +38,13 @@ const SignIn = () => {
   //   console.log(watchFields);
   // }, [watchFields]);
 
-  const onSubmit: SubmitHandler<SignUpSchemaType> = async ({
+  const onSubmit: SubmitHandler<SignInSchemaType> = async ({
     email,
     password,
   }) => {
     try {
       const authorisedUser = await signInUserPassword(email, password);
+      console.log(authorisedUser);
       // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
@@ -55,27 +57,33 @@ const SignIn = () => {
       <p>Sign in</p>
       {authError && <ErrorMessage message={authError} />}
 
-      <Input
-        register={register}
-        hookValue="email"
-        label="Email"
-        id="email"
-        type="email"
-        placeholder="enter your email"
-        disabled={isSubmitting}
-        error={errors.email?.message}
-      />
+      {/* todo: hook up to input helper */}
+      <div>
+        <label htmlFor="email">Email</label>
+        {errors.email && <InlineError>{errors.email.message}</InlineError>}
+        <Input
+          {...register("email")}
+          id="email"
+          type="email"
+          placeholder="enter your email"
+          disabled={isSubmitting}
+        />
+      </div>
 
-      <Input
-        hookValue="password"
-        register={register}
-        label="Password"
-        id="password"
-        placeholder="enter your password"
-        type="password"
-        disabled={isSubmitting}
-        error={errors.password?.message}
-      />
+      {/* todo: hook up to input helper */}
+      <div>
+        <label htmlFor="password">Password</label>
+        {errors.password && (
+          <InlineError>{errors.password.message}</InlineError>
+        )}
+        <Input
+          {...register("password")}
+          id="password"
+          placeholder="enter your password"
+          type="password"
+          disabled={isSubmitting}
+        />
+      </div>
 
       <Button type="submit" disabled={isSubmitting}>
         Sign in

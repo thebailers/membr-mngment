@@ -13,7 +13,7 @@ const setup = () => {
   // )[0] as HTMLInputElement;
   // const inputConfirmPassword: HTMLInputElement =
   //   screen.getByLabelText(/confirm password/i);
-  const button = screen.getByRole("button", { name: /sign up/i });
+  const button = screen.getByRole("button", { name: /sign in/i });
   return {
     // inputEmail,
     // inputPassword,
