@@ -5,6 +5,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
 } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -35,4 +36,12 @@ export const signUpUserEmailPassword = (email: string, password: string) => {
 export const signInEmailPassword = (email: string, password: string) => {
   if (!email || !password) return;
   return signInWithEmailAndPassword(auth, email, password);
+};
+
+export const verifyUserEmail = () => {
+  if (auth.currentUser)
+    sendEmailVerification(auth.currentUser).then(() => {
+      // Email verification sent!
+      console.log("email sent");
+    });
 };

@@ -7,7 +7,10 @@ import ErrorMessage from "../../../components/helpers/error-message/error-messag
 import Button from "../../../components/helpers/form/button/button.component";
 import Input from "../../../components/helpers/form/input/input.component";
 
-import { signUpUserEmailPassword } from "../../../utils/firebase/firebase.utils";
+import {
+  signUpUserEmailPassword,
+  verifyUserEmail,
+} from "../../../utils/firebase/firebase.utils";
 import { friendlyFirebaseError } from "../../../utils/firebase/firebase-errors";
 import { errorMessageMap } from "../../../utils/error.utils";
 
@@ -43,6 +46,7 @@ const SignUp = () => {
   }) => {
     try {
       const authorisedUser = await signUpUserEmailPassword(email, password);
+      verifyUserEmail();
       // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
