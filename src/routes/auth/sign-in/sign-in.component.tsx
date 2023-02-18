@@ -8,7 +8,7 @@ import Button from "../../../components/helpers/form/button/button.component";
 
 import { StyledInput as Input } from "../../../components/helpers/form/input/input.styles";
 
-import { signInUserPassword } from "../../../utils/firebase/firebase.utils";
+import { signInEmailPassword } from "../../../utils/firebase/firebase.utils";
 import { friendlyFirebaseError } from "../../../utils/firebase/firebase-errors";
 
 // form validation schema
@@ -43,7 +43,7 @@ const SignIn = () => {
     password,
   }) => {
     try {
-      const authorisedUser = await signInUserPassword(email, password);
+      const authorisedUser = await signInEmailPassword(email, password);
       console.log(authorisedUser);
       // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {

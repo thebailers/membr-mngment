@@ -32,7 +32,7 @@ export const signUpUserEmailPassword = (email: string, password: string) => {
   return createUserWithEmailAndPassword(auth, email, password);
 };
 
-export const signInUserPassword = (email: string, password: string) => {
+export const signInEmailPassword = (email: string, password: string) => {
   if (!email || !password) return;
   return signInWithEmailAndPassword(auth, email, password);
 };

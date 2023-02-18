@@ -40,7 +40,7 @@ describe("sign up component", () => {
     ).toBeInTheDocument();
   });
 
-  it("doesn't call the firebase sign in api when signin inputs are empty", () => {
+  it("doesn't call the firebase sign in api when sign up inputs are empty", () => {
     const { button } = setup();
     fireEvent.click(button);
     expect(mockSignUpUserEmailPassword).toBeCalledTimes(0);
