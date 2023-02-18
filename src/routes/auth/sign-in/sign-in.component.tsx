@@ -48,6 +48,9 @@ const SignIn = () => {
       // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
+        console.log(error);
+        console.log(error.code);
+        console.log(error.message);
         setAuthError(friendlyFirebaseError(error.code));
       } else setAuthError("Something went wrong - please try again");
     }

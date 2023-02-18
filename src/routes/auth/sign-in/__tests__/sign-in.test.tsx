@@ -51,4 +51,34 @@ describe("sign in component", () => {
       expect(mockSignInEmailPassword).toBeCalledTimes(1);
     });
   });
+
+  it("returns a descriptive error when a user is not found", async () => {
+    (mockSignInEmailPassword as jest.Mock).mockImplementation(() => {
+      throw new FirebaseError(
+        "auth/user-not-found",
+        "Firebase: Error (auth/user-not-found)."
+      );
+    });
+    const { inputEmail, inputPassword, button } = setup();
+    userEvent.type(inputEmail, "billy@tubbins.co.uk");
+    userEvent.type(inputPassword, "123456");
+    userEvent.click(button);
+    expect(await screen.findByText(/user not found/i)).toBeInTheDocument();
+  });
+
+  it("returns a descriptive error when password is incorrect", async () => {
+    (mockSignInEmailPassword as jest.Mock).mockImplementation(() => {
+      throw new FirebaseError(
+        "auth/wrong-password",
+        "Firebase: Error (auth/wrong-password)."
+      );
+    });
+    const { inputEmail, inputPassword, button } = setup();
+    userEvent.type(inputEmail, "billy@tubbins.co.uk");
+    userEvent.type(inputPassword, "123456");
+    userEvent.click(button);
+    expect(
+      await screen.findByText(/password is incorrect/i)
+    ).toBeInTheDocument();
+  });
 });
