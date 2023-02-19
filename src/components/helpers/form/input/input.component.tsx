@@ -3,25 +3,23 @@ import { UseFormRegister, Path } from "react-hook-form";
 
 import { InlineError } from "../../error-message/error.styles";
 
-// type IFormValues = ISignIn | ISignUp;
+export type ISignIn = {
+  email: string;
+  password: string;
+};
 
-// interface ISignIn {
-//   email: string;
-//   password: string;
-// }
-
-interface ISignUp {
+export type ISignUp = {
   email: string;
   password: string;
   confirmPassword: string;
-}
+};
 
-type InputProps = {
-  hookValue: Path<ISignUp>;
+type InputProps<IFormValues extends ISignIn | ISignUp> = {
+  hookValue: Path<IFormValues>;
   id: string;
   label: string;
   type: string;
-  register: UseFormRegister<ISignUp>;
+  register: UseFormRegister<IFormValues>;
   placeholder: string;
   disabled: boolean;
   handleChange?: () => void;
@@ -29,7 +27,7 @@ type InputProps = {
   hint?: string;
 };
 
-const Input = ({
+const Input = <IFormValues extends ISignIn | ISignUp>({
   hookValue,
   id,
   type,
@@ -39,7 +37,7 @@ const Input = ({
   disabled,
   error,
   hint,
-}: InputProps) => {
+}: InputProps<IFormValues>) => {
   return (
     <div>
       <label htmlFor={id}>{label}</label>

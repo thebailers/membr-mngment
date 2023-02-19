@@ -5,7 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import ErrorMessage from "../../../components/helpers/error-message/error-message.component";
 import Button from "../../../components/helpers/form/button/button.component";
-import Input from "../../../components/helpers/form/input/input.component";
+import Input, {
+  ISignUp,
+} from "../../../components/helpers/form/input/input.component";
 
 import {
   signUpUserEmailPassword,

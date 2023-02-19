@@ -6,7 +6,6 @@ import { AuthWrapper } from "./auth.styles";
 const Auth = () => {
   return (
     <AuthWrapper>
-      {/* split auth, sign in and sign up */}
       <ul>
         <li>
           <Link to="/auth/sign-up">sign up</Link>

@@ -1,19 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FirebaseError } from "firebase/app";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import ErrorMessage from "../../../components/helpers/error-message/error-message.component";
 import Button from "../../../components/helpers/form/button/button.component";
-
-import { StyledInput as Input } from "../../../components/helpers/form/input/input.styles";
+import Input from "../../../components/helpers/form/input/input.component";
 
 import { signInEmailPassword } from "../../../utils/firebase/firebase.utils";
 import { friendlyFirebaseError } from "../../../utils/firebase/firebase-errors";
-
+import { errorMessageMap } from "../../../utils/error.utils";
 // form validation schema
 import { SignInSchema, SignInSchemaType } from "../auth.schema";
-import { InlineError } from "../../../components/helpers/error-message/error.styles";
 
 const SignIn = () => {
   const [authError, setAuthError] = useState<string>("");
@@ -48,9 +46,6 @@ const SignIn = () => {
       // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
-        console.log(error);
-        console.log(error.code);
-        console.log(error.message);
         setAuthError(friendlyFirebaseError(error.code));
       } else setAuthError("Something went wrong - please try again");
     }
@@ -60,33 +55,28 @@ const SignIn = () => {
       <p>Sign in</p>
       {authError && <ErrorMessage message={authError} />}
 
-      {/* todo: hook up to input helper */}
-      <div>
-        <label htmlFor="email">Email</label>
-        {errors.email && <InlineError>{errors.email.message}</InlineError>}
-        <Input
-          {...register("email")}
-          id="email"
-          type="email"
-          placeholder="enter your email"
-          disabled={isSubmitting}
-        />
-      </div>
+      <Input
+        register={register}
+        hookValue="email"
+        label="Email"
+        id="email"
+        type="email"
+        placeholder="enter your email"
+        disabled={isSubmitting}
+        error={errors.email?.message}
+      />
 
-      {/* todo: hook up to input helper */}
-      <div>
-        <label htmlFor="password">Password</label>
-        {errors.password && (
-          <InlineError>{errors.password.message}</InlineError>
-        )}
-        <Input
-          {...register("password")}
-          id="password"
-          placeholder="enter your password"
-          type="password"
-          disabled={isSubmitting}
-        />
-      </div>
+      <Input
+        hookValue="password"
+        register={register}
+        label="Password"
+        id="password"
+        placeholder="enter your password"
+        type="password"
+        disabled={isSubmitting}
+        error={errors.password?.message}
+        hint={errorMessageMap.passwordHint}
+      />
 
       <Button type="submit" disabled={isSubmitting}>
         Sign in
