@@ -10,6 +10,7 @@ import Input, {
 } from "../../../components/helpers/form/input/input.component";
 
 import {
+  createUserDocumentFromAuth,
   signUpUserEmailPassword,
   verifyUserEmail,
 } from "../../../utils/firebase/firebase.utils";
@@ -49,6 +50,7 @@ const SignUp = () => {
     try {
       const authorisedUser = await signUpUserEmailPassword(email, password);
       verifyUserEmail();
+      if (authorisedUser) createUserDocumentFromAuth(authorisedUser);
       // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {

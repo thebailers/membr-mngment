@@ -6,7 +6,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
+  UserCredential,
 } from "firebase/auth";
+
+// firestore
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,8 +29,17 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+// Get firestore db
+const db = getFirestore();
+
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
+
+export const createUserDocumentFromAuth = async (userAuth: UserCredential) => {
+  const userDocRef = doc(db, "users", userAuth.user.uid);
+  console.log("userDocRef");
+  console.log(userDocRef);
+};
 
 export const signUpUserEmailPassword = (email: string, password: string) => {
   if (!email || !password) return;
