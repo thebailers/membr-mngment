@@ -12,7 +12,6 @@ import Input, {
 import {
   createUserDocumentFromAuth,
   signUpUserEmailPassword,
-  verifyUserEmail,
 } from "../../../utils/firebase/firebase.utils";
 import { friendlyFirebaseError } from "../../../utils/firebase/firebase-errors";
 import { errorMessageMap } from "../../../utils/error.utils";
@@ -44,13 +43,17 @@ const SignUp = () => {
   // }, [watchFields]);
 
   const onSubmit: SubmitHandler<SignUpSchemaType> = async ({
+    firstName,
+    lastName,
     email,
     password,
   }) => {
     try {
       const authorisedUser = await signUpUserEmailPassword(email, password);
-      verifyUserEmail();
-      if (authorisedUser) createUserDocumentFromAuth(authorisedUser);
+      if (authorisedUser)
+        createUserDocumentFromAuth(authorisedUser.user, {
+          displayName: `${firstName} ${lastName}`,
+        });
       // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
@@ -62,6 +65,28 @@ const SignUp = () => {
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <p>Sign up</p>
       {authError && <ErrorMessage message={authError} />}
+
+      <Input
+        register={register}
+        hookValue="firstName"
+        label="First name"
+        id="firstName"
+        type="firstName"
+        placeholder="enter your first name"
+        disabled={isSubmitting}
+        error={errors.firstName?.message}
+      />
+
+      <Input
+        register={register}
+        hookValue="lastName"
+        label="Last name"
+        id="lastName"
+        type="lastName"
+        placeholder="enter your last name"
+        disabled={isSubmitting}
+        error={errors.lastName?.message}
+      />
 
       <Input
         register={register}

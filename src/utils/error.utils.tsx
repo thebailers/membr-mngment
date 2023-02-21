@@ -6,4 +6,6 @@ export const errorMessageMap = {
   confirmPasswordLength:
     "Password confirmation must be a minimum of 6 characters",
   passwordMatchFailed: "Passwords don't match",
+  firstNameEmpty: "Enter your first name",
+  lastNameEmpty: "Enter your last name",
 };

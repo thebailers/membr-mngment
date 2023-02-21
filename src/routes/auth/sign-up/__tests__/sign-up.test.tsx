@@ -2,12 +2,15 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { FirebaseError } from "firebase/app";
 import SignUp from "../sign-up.component";
 import { signUpUserEmailPassword as mockSignUpUserEmailPassword } from "../../../../utils/firebase/firebase.utils";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("../../../../utils/firebase/firebase.utils");
 
 const setup = () => {
   const utils = render(<SignUp />);
   const inputEmail: HTMLInputElement = screen.getByLabelText(/email/i);
+  const inputFirstName: HTMLInputElement = screen.getByLabelText(/first name/i);
+  const inputLastName: HTMLInputElement = screen.getByLabelText(/last name/i);
   const inputPassword = screen.getAllByLabelText(
     /password/i
   )[0] as HTMLInputElement;
@@ -15,6 +18,8 @@ const setup = () => {
     screen.getByLabelText(/confirm password/i);
   const button = screen.getByRole("button", { name: /sign up/i });
   return {
+    inputFirstName,
+    inputLastName,
     inputEmail,
     inputPassword,
     inputConfirmPassword,
@@ -47,11 +52,20 @@ describe("sign up component", () => {
   });
 
   it("calls the firebase sign up with email/password api when email, password & confirm password present", async () => {
-    const { inputPassword, inputConfirmPassword, inputEmail, button } = setup();
-    fireEvent.change(inputEmail, { target: { value: "billy@tubbins.com" } });
-    fireEvent.change(inputPassword, { target: { value: "123456" } });
-    fireEvent.change(inputConfirmPassword, { target: { value: "123456" } });
-    fireEvent.click(button);
+    const {
+      inputFirstName,
+      inputLastName,
+      inputPassword,
+      inputConfirmPassword,
+      inputEmail,
+      button,
+    } = setup();
+    userEvent.type(inputFirstName, "billy");
+    userEvent.type(inputLastName, "tubbins");
+    userEvent.type(inputEmail, "billy@tubbins.com");
+    userEvent.type(inputPassword, "123456");
+    userEvent.type(inputConfirmPassword, "123456");
+    userEvent.click(button);
     await waitFor(() => {
       expect(mockSignUpUserEmailPassword).toBeCalledTimes(1);
     });
@@ -78,11 +92,20 @@ describe("sign up component", () => {
         "Firebase: Error (auth/email-already-in-use)."
       );
     });
-    const { inputPassword, inputConfirmPassword, inputEmail, button } = setup();
-    fireEvent.change(inputEmail, { target: { value: "billy@tubbins.co.uk" } });
-    fireEvent.change(inputPassword, { target: { value: "123456" } });
-    fireEvent.change(inputConfirmPassword, { target: { value: "123456" } });
-    fireEvent.click(button);
+    const {
+      inputFirstName,
+      inputLastName,
+      inputPassword,
+      inputConfirmPassword,
+      inputEmail,
+      button,
+    } = setup();
+    userEvent.type(inputFirstName, "billy");
+    userEvent.type(inputLastName, "tubbins");
+    userEvent.type(inputEmail, "billy@tubbins.co.uk");
+    userEvent.type(inputPassword, "123456");
+    userEvent.type(inputConfirmPassword, "123456");
+    userEvent.click(button);
     expect(
       await screen.findByText(/email address in use/i)
     ).toBeInTheDocument();

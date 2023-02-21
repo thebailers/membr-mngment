@@ -6,6 +6,8 @@ export type SignInSchemaType = z.infer<typeof SignInSchema>;
 
 export const SignUpSchema = z
   .object({
+    firstName: z.string().min(1, errorMessageMap.firstNameEmpty),
+    lastName: z.string().min(1, errorMessageMap.lastNameEmpty),
     email: z
       .string()
       .email(errorMessageMap.emailAddressInvalid)

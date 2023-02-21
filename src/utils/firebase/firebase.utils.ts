@@ -6,7 +6,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
-  UserCredential,
+  User,
 } from "firebase/auth";
 
 // firestore
@@ -35,10 +35,33 @@ const db = getFirestore();
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-export const createUserDocumentFromAuth = async (userAuth: UserCredential) => {
-  const userDocRef = doc(db, "users", userAuth.user.uid);
-  console.log("userDocRef");
-  console.log(userDocRef);
+type AdditionalInformation = {
+  displayName?: string;
+};
+
+export const createUserDocumentFromAuth = async (
+  userAuth: User,
+  additionalInformation: AdditionalInformation
+) => {
+  const userDocRef = doc(db, "users", userAuth.uid);
+  const userSnapshot = await getDoc(userDocRef);
+
+  // check if user exits in the database
+  if (!userSnapshot.exists()) {
+    // add user to db
+    const { email, displayName } = userAuth;
+    const createdAt = new Date();
+    try {
+      await setDoc(userDocRef, {
+        displayName,
+        email,
+        createdAt,
+        ...additionalInformation,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 };
 
 export const signUpUserEmailPassword = (email: string, password: string) => {
