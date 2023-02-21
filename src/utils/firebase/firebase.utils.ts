@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   sendEmailVerification,
   User,
+  signOut,
 } from "firebase/auth";
 
 // firestore
@@ -64,20 +65,27 @@ export const createUserDocumentFromAuth = async (
   }
 };
 
-export const signUpUserEmailPassword = (email: string, password: string) => {
+export const signUpUserEmailPassword = async (
+  email: string,
+  password: string
+) => {
   if (!email || !password) return;
-  return createUserWithEmailAndPassword(auth, email, password);
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
 
-export const signInEmailPassword = (email: string, password: string) => {
+export const signInEmailPassword = async (email: string, password: string) => {
   if (!email || !password) return;
-  return signInWithEmailAndPassword(auth, email, password);
+  return await signInWithEmailAndPassword(auth, email, password);
 };
 
-export const verifyUserEmail = () => {
+export const verifyUserEmail = async () => {
   if (auth.currentUser)
-    sendEmailVerification(auth.currentUser).then(() => {
+    await sendEmailVerification(auth.currentUser).then(() => {
       // Email verification sent!
       console.log("email sent");
     });
+};
+
+export const signOutUser = async () => {
+  return await signOut(auth);
 };

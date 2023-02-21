@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+
+import { signOutUser } from "../../utils/firebase/firebase.utils";
+
+import { UserContext } from "../../contexts/user.context";
 
 import { daysOfWeekArray, urlFriendlyWeekday } from "../../utils/utils";
 
@@ -7,6 +11,12 @@ const Header = () => {
   const [currentDay, setCurrentDay] = useState<string>(
     urlFriendlyWeekday(daysOfWeekArray[new Date().getDay()])
   );
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  const signOutHandler = async () => {
+    await signOutUser();
+    setCurrentUser(null);
+  };
   return (
     <div>
       <div className="logo">Logo</div>
@@ -16,7 +26,11 @@ const Header = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/auth">Sign up</Link>
+            {currentUser ? (
+              <span onClick={signOutHandler}>Sign out</span>
+            ) : (
+              <Link to="/auth">Log in or register</Link>
+            )}
           </li>
           {currentDay && (
             <li>
