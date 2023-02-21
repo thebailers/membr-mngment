@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { FirebaseError } from "firebase/app";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,8 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import ErrorMessage from "../../../components/helpers/error-message/error-message.component";
 import Button from "../../../components/helpers/form/button/button.component";
 import Input from "../../../components/helpers/form/input/input.component";
-
-import { UserContext } from "../../../contexts/user.context";
 
 import { signInEmailPassword } from "../../../utils/firebase/firebase.utils";
 import { friendlyFirebaseError } from "../../../utils/firebase/firebase-errors";
@@ -17,7 +15,6 @@ import { SignInSchema, SignInSchemaType } from "../auth.schema";
 
 const SignIn = () => {
   const [authError, setAuthError] = useState<string>("");
-  const { setCurrentUser } = useContext(UserContext);
 
   // react hook form setup
   const {
@@ -45,7 +42,6 @@ const SignIn = () => {
   }) => {
     try {
       const authorisedUser = await signInEmailPassword(email, password);
-      if (authorisedUser) setCurrentUser(authorisedUser.user);
       // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {
       console.log(error);

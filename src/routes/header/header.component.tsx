@@ -11,12 +11,10 @@ const Header = () => {
   const [currentDay, setCurrentDay] = useState<string>(
     urlFriendlyWeekday(daysOfWeekArray[new Date().getDay()])
   );
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
 
-  const signOutHandler = async () => {
-    await signOutUser();
-    setCurrentUser(null);
-  };
+  const signOutHandler = async () => await signOutUser();
+
   return (
     <div>
       <div className="logo">Logo</div>

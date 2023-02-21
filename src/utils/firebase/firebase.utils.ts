@@ -8,6 +8,7 @@ import {
   sendEmailVerification,
   User,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 // firestore
@@ -39,6 +40,9 @@ const auth = getAuth(app);
 type AdditionalInformation = {
   displayName?: string;
 };
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
 
 export const createUserDocumentFromAuth = async (
   userAuth: User,
