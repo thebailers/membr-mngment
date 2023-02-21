@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { FirebaseError } from "firebase/app";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import ErrorMessage from "../../../components/helpers/error-message/error-message.component";
 import Button from "../../../components/helpers/form/button/button.component";
-import Input, {
-  ISignUp,
-} from "../../../components/helpers/form/input/input.component";
+import Input from "../../../components/helpers/form/input/input.component";
+
+import { UserContext } from "../../../contexts/user.context";
 
 import {
   createUserDocumentFromAuth,
@@ -21,6 +21,7 @@ import { SignUpSchema, SignUpSchemaType } from "../auth.schema";
 
 const SignUp = () => {
   const [authError, setAuthError] = useState<string>("");
+  const { setCurrentUser } = useContext(UserContext);
 
   // react hook form setup
   const {
@@ -50,10 +51,12 @@ const SignUp = () => {
   }) => {
     try {
       const authorisedUser = await signUpUserEmailPassword(email, password);
-      if (authorisedUser)
+      if (authorisedUser) {
+        setCurrentUser(authorisedUser.user);
         createUserDocumentFromAuth(authorisedUser.user, {
           displayName: `${firstName} ${lastName}`,
         });
+      }
       // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
