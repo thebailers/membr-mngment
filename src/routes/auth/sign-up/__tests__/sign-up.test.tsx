@@ -51,7 +51,7 @@ describe("sign up component", () => {
     expect(mockSignUpUserEmailPassword).toBeCalledTimes(0);
   });
 
-  it("calls the firebase sign up with email/password api when email, password & confirm password present", async () => {
+  it("calls the firebase sign up with email/password api when all fields are valid", async () => {
     const {
       inputFirstName,
       inputLastName,
@@ -72,7 +72,16 @@ describe("sign up component", () => {
   });
 
   it("doesn't call the firebase sign up with email/password api when password & confirm password do not match", async () => {
-    const { inputEmail, inputPassword, inputConfirmPassword, button } = setup();
+    const {
+      inputFirstName,
+      inputLastName,
+      inputEmail,
+      inputPassword,
+      inputConfirmPassword,
+      button,
+    } = setup();
+    userEvent.type(inputFirstName, "billy");
+    userEvent.type(inputLastName, "tubbins");
     fireEvent.change(inputEmail, {
       target: { value: "billy@tubbins.com" },
     });
@@ -112,11 +121,9 @@ describe("sign up component", () => {
   });
 
   it("displays relevant error message when email address invalid", async () => {
-    const { inputPassword, inputConfirmPassword, inputEmail, button } = setup();
-    fireEvent.change(inputEmail, { target: { value: "billytubbins" } });
-    fireEvent.change(inputPassword, { target: { value: "123456" } });
-    fireEvent.change(inputConfirmPassword, { target: { value: "123456" } });
-    fireEvent.click(button);
+    const { inputEmail, button } = setup();
+    userEvent.type(inputEmail, "billytubbins");
+    userEvent.click(button);
     expect(
       await screen.findByText(/enter a valid email address/i)
     ).toBeInTheDocument();
