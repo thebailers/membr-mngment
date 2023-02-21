@@ -13,8 +13,6 @@ const Header = () => {
   );
   const { currentUser } = useContext(UserContext);
 
-  const signOutHandler = async () => await signOutUser();
-
   return (
     <div>
       <div className="logo">Logo</div>
@@ -25,7 +23,7 @@ const Header = () => {
           </li>
           <li>
             {currentUser ? (
-              <span onClick={signOutHandler}>Sign out</span>
+              <span onClick={signOutUser}>Sign out</span>
             ) : (
               <Link to="/auth">Log in or register</Link>
             )}
