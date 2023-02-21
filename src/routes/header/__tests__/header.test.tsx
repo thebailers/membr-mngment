@@ -76,13 +76,11 @@ describe("the header component", () => {
         currentUser: {
           email: "billy@tubbins.com",
         },
-        setCurrentUser: jest.fn(),
       },
     };
     customRender(<Header />, { providerProps });
     expect(screen.getByText(/sign out/i)).toBeInTheDocument();
     userEvent.click(screen.getByText(/sign out/i));
-    expect(await providerProps.value.setCurrentUser).toBeCalledTimes(1);
-    expect(await providerProps.value.setCurrentUser).toBeCalledWith(null);
+    expect(mockSignOutUser).toBeCalledTimes(1);
   });
 });
