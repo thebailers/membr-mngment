@@ -1,9 +1,27 @@
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import {
+  Routes,
+  Route,
+  Link,
+  Navigate,
+  redirect,
+  useNavigate,
+} from "react-router-dom";
 import SignUp from "./sign-up/sign-up.component";
 import SignIn from "./sign-in/sign-in.component";
+
+import { UserContext } from "../../contexts/user.context";
+
 import { AuthWrapper } from "./auth.styles";
 
 const Auth = () => {
+  const { currentUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currentUser) navigate("/classes");
+  }, [currentUser, navigate]);
+
   return (
     <AuthWrapper>
       <ul>
