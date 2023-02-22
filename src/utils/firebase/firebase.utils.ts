@@ -6,10 +6,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
-  User,
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+
+import type { User, NextOrObserver } from "firebase/auth";
 
 // firestore
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
@@ -41,7 +42,7 @@ type AdditionalInformation = {
   displayName?: string;
 };
 
-export const onAuthStateChangedListener = (callback) =>
+export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>
   onAuthStateChanged(auth, callback);
 
 export const createUserDocumentFromAuth = async (
