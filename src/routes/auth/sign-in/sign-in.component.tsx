@@ -21,6 +21,7 @@ const SignIn = () => {
     register,
     watch,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<SignInSchemaType>({
     resolver: zodResolver(SignInSchema),
@@ -42,6 +43,7 @@ const SignIn = () => {
   }) => {
     try {
       const authorisedUser = await signInEmailPassword(email, password);
+      reset(); // reset form fields
       // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {
       console.log(error);

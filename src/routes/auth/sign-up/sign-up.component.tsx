@@ -25,6 +25,7 @@ const SignUp = () => {
     register,
     watch,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<SignUpSchemaType>({
     resolver: zodResolver(SignUpSchema),
@@ -48,6 +49,7 @@ const SignUp = () => {
   }) => {
     try {
       const authorisedUser = await signUpUserEmailPassword(email, password);
+      reset();
       if (authorisedUser) {
         createUserDocumentFromAuth(authorisedUser.user, {
           displayName: `${firstName} ${lastName}`,
