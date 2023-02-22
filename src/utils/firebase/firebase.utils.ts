@@ -8,12 +8,15 @@ import {
   sendEmailVerification,
   signOut,
   onAuthStateChanged,
+  UserCredential,
 } from "firebase/auth";
 
 import type { User, NextOrObserver } from "firebase/auth";
 
 // firestore
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+
+import type { QueryDocumentSnapshot } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -38,17 +41,23 @@ const db = getFirestore(app);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
+export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>
+  onAuthStateChanged(auth, callback);
+
 type AdditionalInformation = {
   displayName?: string;
 };
 
-export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>
-  onAuthStateChanged(auth, callback);
+type UserData = {
+  createdAt: Date;
+  displayName: string;
+  email: string;
+};
 
 export const createUserDocumentFromAuth = async (
   userAuth: User,
   additionalInformation = {} as AdditionalInformation
-) => {
+): Promise<void | QueryDocumentSnapshot<UserData>> => {
   const userDocRef = doc(db, "users", userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
 
@@ -66,6 +75,12 @@ export const createUserDocumentFromAuth = async (
       console.log("error creating the user document:", e);
     }
   }
+  return userSnapshot as QueryDocumentSnapshot<UserData>;
+};
+
+export const setUserAfterSignUp = async (authUser: UserCredential) => {
+  const userDocRef = doc(db, "users", authUser.user.uid);
+  const userSnapshot = await getDoc(userDocRef);
   return userSnapshot;
 };
 

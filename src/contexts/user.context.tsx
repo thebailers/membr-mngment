@@ -25,8 +25,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener(async (user) => {
       let userSnapshot: DocumentData | null | undefined = null;
-      if (user)
-        userSnapshot = await (await createUserDocumentFromAuth(user)).data();
+      if (user) {
+        const result = await createUserDocumentFromAuth(user);
+        if (result) userSnapshot = result.data();
+      }
       setCurrentUser(userSnapshot);
     });
     return unsubscribe;

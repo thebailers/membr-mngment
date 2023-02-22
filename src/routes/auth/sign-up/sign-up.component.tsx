@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { FirebaseError } from "firebase/app";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { UserContext } from "../../../contexts/user.context";
 
 import ErrorMessage from "../../../components/helpers/error-message/error-message.component";
 import Button from "../../../components/helpers/form/button/button.component";
@@ -9,6 +11,7 @@ import Input from "../../../components/helpers/form/input/input.component";
 
 import {
   createUserDocumentFromAuth,
+  setUserAfterSignUp,
   signUpUserEmailPassword,
 } from "../../../utils/firebase/firebase.utils";
 import { friendlyFirebaseError } from "../../../utils/firebase/firebase-errors";
@@ -19,6 +22,7 @@ import { SignUpSchema, SignUpSchemaType } from "../auth.schema";
 
 const SignUp = () => {
   const [authError, setAuthError] = useState<string>("");
+  const { setCurrentUser } = useContext(UserContext);
 
   // react hook form setup
   const {
@@ -51,9 +55,11 @@ const SignUp = () => {
       const authorisedUser = await signUpUserEmailPassword(email, password);
       reset();
       if (authorisedUser) {
-        createUserDocumentFromAuth(authorisedUser.user, {
+        await createUserDocumentFromAuth(authorisedUser.user, {
           displayName: `${firstName} ${lastName}`,
         });
+        const snapshot = await setUserAfterSignUp(authorisedUser);
+        setCurrentUser(snapshot);
       }
       // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {
