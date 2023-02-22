@@ -33,7 +33,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Get firestore db
-const db = getFirestore();
+const db = getFirestore(app);
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
@@ -47,14 +47,12 @@ export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>
 
 export const createUserDocumentFromAuth = async (
   userAuth: User,
-  additionalInformation: AdditionalInformation
+  additionalInformation = {} as AdditionalInformation
 ) => {
   const userDocRef = doc(db, "users", userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
 
-  // check if user exits in the database
   if (!userSnapshot.exists()) {
-    // add user to db
     const { email, displayName } = userAuth;
     const createdAt = new Date();
     try {
@@ -65,9 +63,10 @@ export const createUserDocumentFromAuth = async (
         ...additionalInformation,
       });
     } catch (e) {
-      console.log(e);
+      console.log("error creating the user document:", e);
     }
   }
+  return userSnapshot;
 };
 
 export const signUpUserEmailPassword = async (
@@ -84,11 +83,7 @@ export const signInEmailPassword = async (email: string, password: string) => {
 };
 
 export const verifyUserEmail = async () => {
-  if (auth.currentUser)
-    await sendEmailVerification(auth.currentUser).then(() => {
-      // Email verification sent!
-      console.log("email sent");
-    });
+  if (auth.currentUser) await sendEmailVerification(auth.currentUser);
 };
 
 export const signOutUser = async () => {

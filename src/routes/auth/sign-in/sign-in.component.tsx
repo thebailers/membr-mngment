@@ -42,11 +42,9 @@ const SignIn = () => {
     password,
   }) => {
     try {
-      const authorisedUser = await signInEmailPassword(email, password);
+      await signInEmailPassword(email, password);
       reset(); // reset form fields
-      // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {
-      console.log(error);
       if (error instanceof FirebaseError) {
         setAuthError(friendlyFirebaseError(error.code));
       } else setAuthError("Something went wrong - please try again");

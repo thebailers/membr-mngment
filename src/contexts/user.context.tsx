@@ -1,11 +1,15 @@
 import { createContext, useState, useEffect } from "react";
 import type { ReactNode, Dispatch, SetStateAction } from "react";
 import type { User } from "firebase/auth";
-import { onAuthStateChangedListener } from "../utils/firebase/firebase.utils";
+import type { DocumentData } from "firebase/firestore";
+import {
+  createUserDocumentFromAuth,
+  onAuthStateChangedListener,
+} from "../utils/firebase/firebase.utils";
 
 type UserContextType = {
-  currentUser: User | null;
-  setCurrentUser: Dispatch<SetStateAction<User | null>>;
+  currentUser: DocumentData | null | undefined;
+  setCurrentUser: Dispatch<SetStateAction<DocumentData | null | undefined>>;
 };
 
 export const UserContext = createContext<UserContextType>({
@@ -14,12 +18,16 @@ export const UserContext = createContext<UserContextType>({
 });
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<
+    DocumentData | null | undefined
+  >(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      console.log(user);
-      setCurrentUser(user);
+    const unsubscribe = onAuthStateChangedListener(async (user) => {
+      let userSnapshot = null;
+      if (user)
+        userSnapshot = await (await createUserDocumentFromAuth(user)).data();
+      setCurrentUser(userSnapshot);
     });
     return unsubscribe;
   }, []);
