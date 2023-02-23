@@ -81,4 +81,39 @@ describe("sign in component", () => {
       await screen.findByText(/password is incorrect/i)
     ).toBeInTheDocument();
   });
+
+  it("calls the sign in fns with email and password", async () => {
+    const email = "billy@tubbins.com";
+    const password = "123456";
+    (mockSignInEmailPassword as jest.Mock).mockImplementation(() => {});
+
+    const { inputEmail, inputPassword, button } = setup();
+    userEvent.type(inputEmail, email);
+    userEvent.type(inputPassword, password);
+    userEvent.click(button);
+
+    await waitFor(() => {
+      expect(mockSignInEmailPassword).toBeCalledTimes(1);
+    });
+    await waitFor(() => {
+      expect(mockSignInEmailPassword).toBeCalledWith(email, password);
+    });
+  });
+
+  it("resets the sign in forms on successful submission", async () => {
+    const email = "billy@tubbins.com";
+    const password = "123456";
+    (mockSignInEmailPassword as jest.Mock).mockImplementation(() => {});
+
+    const { inputEmail, inputPassword, button } = setup();
+    userEvent.type(inputEmail, email);
+    userEvent.type(inputPassword, password);
+    userEvent.click(button);
+
+    await waitFor(() => {
+      expect(mockSignInEmailPassword).toBeCalledWith(email, password);
+    });
+    expect(await inputEmail.value).toBe("");
+    expect(await inputPassword.value).toBe("");
+  });
 });
