@@ -52,16 +52,16 @@ const SignUp = () => {
     password,
   }) => {
     try {
-      const authorisedUser = await signUpUserEmailPassword(email, password);
+      const authUser = await signUpUserEmailPassword(email, password);
       reset();
-      if (authorisedUser) {
-        await createUserDocumentFromAuth(authorisedUser.user, {
+      if (authUser) {
+        const { user } = authUser;
+        await createUserDocumentFromAuth(user, {
           displayName: `${firstName} ${lastName}`,
         });
-        const snapshot = await setUserAfterSignUp(authorisedUser);
+        const snapshot = await setUserAfterSignUp(user);
         setCurrentUser(snapshot);
       }
-      // store signed in user 'authorisedUser' in UserContext
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         setAuthError(friendlyFirebaseError(error.code));

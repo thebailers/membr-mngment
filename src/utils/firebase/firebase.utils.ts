@@ -78,8 +78,8 @@ export const createUserDocumentFromAuth = async (
   return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
 
-export const setUserAfterSignUp = async (authUser: UserCredential) => {
-  const userDocRef = doc(db, "users", authUser.user.uid);
+export const setUserAfterSignUp = async (authUser: User) => {
+  const userDocRef = doc(db, "users", authUser.uid);
   const userSnapshot = await getDoc(userDocRef);
   return userSnapshot;
 };
