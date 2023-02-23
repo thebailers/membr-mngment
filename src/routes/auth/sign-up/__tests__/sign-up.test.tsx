@@ -209,4 +209,33 @@ describe("sign up component", () => {
       expect(value.setCurrentUser).toBeCalledWith({});
     });
   });
+
+  it("resets the sign up form on successful submission", async () => {
+    (mockSignUpUserEmailPassword as jest.Mock).mockImplementation(() => {});
+
+    const {
+      inputFirstName,
+      inputLastName,
+      inputPassword,
+      inputConfirmPassword,
+      inputEmail,
+      button,
+    } = setup();
+
+    userEvent.type(inputFirstName, "billy");
+    userEvent.type(inputLastName, "tubbins");
+    userEvent.type(inputEmail, "billy@tubbins.co.uk");
+    userEvent.type(inputPassword, "123456");
+    userEvent.type(inputConfirmPassword, "123456");
+    userEvent.click(button);
+
+    await waitFor(() => {
+      expect(mockSignUpUserEmailPassword).toBeCalledTimes(1);
+    });
+    expect(inputFirstName.value).toBe("");
+    expect(inputLastName.value).toBe("");
+    expect(inputEmail.value).toBe("");
+    expect(inputPassword.value).toBe("");
+    expect(inputConfirmPassword.value).toBe("");
+  });
 });
