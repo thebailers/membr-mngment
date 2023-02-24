@@ -14,7 +14,7 @@ const Header = () => {
   const { currentUser } = useContext(UserContext);
 
   return (
-    <div>
+    <div className="header">
       <div className="logo">Logo</div>
       <div className="menu">
         <ul>

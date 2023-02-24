@@ -1,6 +1,9 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { Link } from "react-router-dom";
 
+// images
+import charles from "../public/images/charles-negremonte.jpg";
+
 export const colors: { [key: string]: string } = {
   blue: "#63B0CD",
   darkGrey: "#39393A",
@@ -10,28 +13,31 @@ export const colors: { [key: string]: string } = {
 };
 
 export const GlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
+  *, *::before, *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-size: 62.5%;
   }
 
   body {
     background-color: ${colors.darkGrey};
+    box-sizing: border-box;
     color: #fff;
-    margin: 0;
-    min-height: 100vh;
-    padding: 20px 40px;
+    font-size:1.6rem;
+    line-height: 1.7;
+    font-weight: 400;
     font-family: 'Open Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding: 3rem;
 
     @media screen and (max-width: 800px) {
-      padding: 10px;
+      padding: 1rem;
     }
-  }
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
   }
 
   a {
@@ -41,16 +47,27 @@ export const GlobalStyle = createGlobalStyle`
 
   label {
     display: block;
-    margin-bottom: 7px;
+    margin-bottom: 0.7rem;
   }
 
   input {
-    margin-bottom: 25px;
+    margin-bottom: 2.5rem;
   }
 
   .hint {
     color: ${colors.duskyGold};
-    margin-bottom: 7px;
+    margin-bottom: 0.7rem;
+  }
+
+  .App {
+    background-image: 
+      linear-gradient(to right bottom, rgba(57, 57, 58, 0.92), rgba(60, 60, 60, 0.92)), 
+      url('/images/charles-negremonte.jpg');
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    height: 90vh;
+    position: relative;
   }
 
 `;
@@ -60,7 +77,7 @@ type AnchorProps = {
 };
 
 export const HorizontalMenuLink = styled(Link)<AnchorProps>`
-  padding: 0 10px;
+  padding: 0 1rem;
   color: ${(props) => (props.$active ? "#63b0cd" : "#9b9b93")};
   text-decoration: ${(props) => (props.$active ? "underline" : "none")};
 `;
@@ -75,22 +92,22 @@ export const InactiveLink = styled(HorizontalMenuLink)`
 
 export const NotesContainer = styled.div`
   background: #3b3b3b;
-  border: 1px solid lightgray;
+  border: 0.1rem solid lightgray;
   display: inline-block;
-  margin-bottom: 25px;
-  padding: 20px;
+  margin-bottom: 2.5rem;
+  padding: 2rem;
 `;
 
 export const NotesHeader = styled.h3`
   color: #b3b3b3;
-  font-size: 1.125rem;
+  font-size: 2rem;
   font-weight: 400;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 `;
 
 export const NotesList = styled.li`
   color: #b3b3b3;
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: 400;
-  margin-left: 10px;
+  margin-left: 1rem;
 `;

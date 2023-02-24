@@ -7,7 +7,7 @@ const setup = () => render(<Home />);
 describe("the home component", () => {
   test("renders the first para", () => {
     setup();
-    const paraElement = screen.getByText(/Home content TBC/i);
+    const paraElement = screen.getByText(/Centre Line/i);
     expect(paraElement).toBeInTheDocument();
   });
 });
