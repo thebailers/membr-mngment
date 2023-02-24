@@ -21,22 +21,25 @@ const Header = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            {currentUser ? (
-              <span onClick={signOutUser}>Sign out</span>
-            ) : (
+          {!currentUser ? (
+            <li>
               <Link to="/auth">Log in or register</Link>
-            )}
-          </li>
+            </li>
+          ) : null}
           {currentDay && (
             <li>
-              <Link to={`/classes/${currentDay}`}>
-                Classes [TODO: Conditional: if logged in]
-              </Link>
+              <Link to={`/classes/${currentDay}`}>Classes</Link>
             </li>
           )}
         </ul>
       </div>
+
+      {currentUser ? (
+        <p>
+          Signed in as <Link to="/profile">{currentUser.displayName}</Link>.
+          <button onClick={signOutUser}>Sign out</button>
+        </p>
+      ) : null}
     </div>
   );
 };
