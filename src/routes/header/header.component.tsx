@@ -15,24 +15,23 @@ const Header = () => {
 
   return (
     <div className="header">
-      <div className="logo">Logo</div>
-      <div className="menu">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
+      <div className="header__logo">Logo</div>
+
+      <ul className="header__menu">
+        <li className="header__menu--listitem">
+          <Link to="/">Home</Link>
+        </li>
+        {!currentUser ? (
+          <li className="header__menu--listitem">
+            <Link to="/auth">Log in or register</Link>
           </li>
-          {!currentUser ? (
-            <li>
-              <Link to="/auth">Log in or register</Link>
-            </li>
-          ) : null}
-          {currentDay && (
-            <li>
-              <Link to={`/classes/${currentDay}`}>Classes</Link>
-            </li>
-          )}
-        </ul>
-      </div>
+        ) : null}
+        {currentDay && (
+          <li className="header__menu--listitem">
+            <Link to={`/classes/${currentDay}`}>Classes</Link>
+          </li>
+        )}
+      </ul>
 
       {currentUser ? (
         <p>

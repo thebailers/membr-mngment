@@ -70,6 +70,37 @@ export const GlobalStyle = createGlobalStyle`
     position: relative;
   }
 
+  .header {
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > * {
+      
+    }
+
+    &__logo {
+      margin-left: 3rem;
+    }
+
+    &__menu {
+      display: flex;
+      align-items: center;
+      align-self: stretch;
+      margin-right: 3rem;
+      
+      &--listitem {
+        list-style: none;
+
+        &:not(:last-child) {
+          margin-right: 1.5rem;
+        }
+      }
+
+    }
+  }
+
 `;
 
 type AnchorProps = {
