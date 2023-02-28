@@ -13,6 +13,8 @@ export const colors: { [key: string]: string } = {
 };
 
 export const GlobalStyle = createGlobalStyle`
+  $font-primary: 'Inter', sans-serif;
+
   *, *::before, *::after {
     box-sizing: inherit;
     margin: 0;
@@ -20,17 +22,17 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html {
+    box-sizing: border-box;
     font-size: 62.5%;
   }
 
   body {
     background-color: ${colors.darkGrey};
-    box-sizing: border-box;
     color: #fff;
     font-size:1.6rem;
     line-height: 1.7;
     font-weight: 400;
-    font-family: 'Open Sans', sans-serif;
+    font-family: $font-primary;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding: 3rem;
