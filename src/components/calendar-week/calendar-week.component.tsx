@@ -15,8 +15,23 @@ const CalendarWeek = () => {
         <div className="day saturday"></div>
         <div className="day sunday"></div>
       </div>
+
       <div className="calendar-guides">
-        <div className="guide nine">09.00</div>
+        <div className="guide nine topNeg50">
+          <span className="time">09.00</span>
+        </div>
+        <div className="guide twelve topNeg50">
+          <span className="time">12.00</span>
+        </div>
+        <div className="guide fifteen topNeg50">
+          <span className="time">15.00</span>
+        </div>
+        <div className="guide eighteen topNeg50">
+          <span className="time">18.00</span>
+        </div>
+        <div className="guide twentyone topNeg50">
+          <span className="time">21.00</span>
+        </div>
       </div>
     </CalendarGrid>
   );
