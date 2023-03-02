@@ -13,20 +13,28 @@ export const CalendarGrid = styled.div`
   grid-template-columns: 60px 1fr 60px;
 
   .calendar-guides {
-    position: relative;
+    /* position: relative; */
     z-index: 1;
-    transform: translateX(-30px);
+    /* transform: translateX(-30px); */
 
     grid-column: 2 / 2;
     grid-row: 2 / 2;
 
+    display: grid;
+    grid-template-rows: repeat(12, 1fr);
+
     .guide {
+      border-top: 1px solid currentColor;
       color: ${guideColor};
-      position: absolute;
-      left: 0;
+      /* position: absolute;
+      left: 0; */
       width: 100%;
 
-      &.unnumbered {
+      &.twenty_twentyone {
+        align-self: end;
+      }
+
+      /* &.unnumbered {
         height: 1px;
         width: 100%;
       }
@@ -40,9 +48,9 @@ export const CalendarGrid = styled.div`
         height: 1px;
         width: calc(100% + 20px);
         transform: translateY(-50%);
-      }
+      } */
 
-      &.nine {
+      /* &.nine {
         top: 0;
       }
       &.ten {
@@ -90,12 +98,12 @@ export const CalendarGrid = styled.div`
 
       &.twentyone {
         top: 100%;
-      }
+      } */
     }
   }
 
   .calendar-grid {
-    transform: translateX(30px);
+    /* transform: translateX(30px); */
     grid-column: 2 / 2;
     grid-row: 2 / 2;
     z-index: 2;
