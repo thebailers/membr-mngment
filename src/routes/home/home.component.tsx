@@ -1,11 +1,13 @@
-import { HeroHeading } from "./home.styles";
+import { HomeWrap, HeroHeading } from "./home.styles";
 
 const Home = () => {
   return (
-    <HeroHeading>
-      <span className="hero-heading-primary">Centre Line</span>
-      <span className="hero-heading-secondary">Brazilian Jiu Jitsu</span>
-    </HeroHeading>
+    <HomeWrap>
+      <HeroHeading>
+        <span className="hero-heading-primary">Centre Line</span>
+        <span className="hero-heading-secondary">Brazilian Jiu Jitsu</span>
+      </HeroHeading>
+    </HomeWrap>
   );
 };
 

@@ -63,12 +63,8 @@ export const GlobalStyle = createGlobalStyle`
 
   .App {
     background-image: 
-      linear-gradient(to right bottom, rgba(57, 57, 58, 0.92), rgba(60, 60, 60, 0.92)), 
-      url('/images/charles-negremonte.jpg');
-    background-size: cover;
-    background-position: center;
-    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-    height: 90vh;
+      linear-gradient(to right bottom, rgba(57, 57, 58, 0.92), rgba(60, 60, 60, 0.92));
+
     position: relative;
   }
 

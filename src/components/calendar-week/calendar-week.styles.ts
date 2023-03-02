@@ -14,7 +14,7 @@ export const CalendarGrid = styled.div`
 
   .calendar-guides {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     transform: translateX(-30px);
 
     grid-column: 2 / 2;
@@ -26,13 +26,18 @@ export const CalendarGrid = styled.div`
       left: 0;
       width: 100%;
 
+      &.unnumbered {
+        height: 1px;
+        width: 100%;
+      }
+
       &::before {
         content: "";
         position: absolute;
         top: 50%;
         left: 40px;
         background: currentColor;
-        height: 2px;
+        height: 1px;
         width: calc(100% + 20px);
         transform: translateY(-50%);
       }
@@ -40,17 +45,47 @@ export const CalendarGrid = styled.div`
       &.nine {
         top: 0;
       }
+      &.ten {
+        top: 8.33333333334%;
+      }
+      &.eleven {
+        top: 16.6666666667%;
+      }
 
       &.twelve {
         top: 25%;
+      }
+
+      &.thirteen {
+        top: 33.3333333334%;
+      }
+
+      &.fourteen {
+        top: 41.6666666667%;
       }
 
       &.fifteen {
         top: 50%;
       }
 
+      &.sixteen {
+        top: 58.3333333334%;
+      }
+
+      &.seventeen {
+        top: 66.6666666667%;
+      }
+
       &.eighteen {
         top: 75%;
+      }
+
+      &.nineteen {
+        top: 83.3333333334%;
+      }
+
+      &.twenty {
+        top: 91.6666666667%;
       }
 
       &.twentyone {
@@ -63,10 +98,10 @@ export const CalendarGrid = styled.div`
     transform: translateX(30px);
     grid-column: 2 / 2;
     grid-row: 2 / 2;
-    z-index: 1;
+    z-index: 2;
 
     display: grid;
-    grid-template-areas: "mon tue wed thur fri sat sun";
+    grid-template-columns: repeat(7, 1fr);
 
     .day {
       background: rgba(255, 255, 255, 0.1);
