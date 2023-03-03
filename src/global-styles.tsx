@@ -6,10 +6,15 @@ import charles from "../public/images/charles-negremonte.jpg";
 
 export const colors: { [key: string]: string } = {
   blue: "#63B0CD",
+  blueRgb: "99, 176, 205",
   darkGrey: "#39393A",
+  darkGreyRgb: "57, 57, 58",
   duskyGold: "#9B9B93",
+  duskyGoldRgb: "155, 155, 147",
   lilac: "#E9D2F4",
+  lilacRgb: "233, 210, 244",
   midGold: "#C1B098",
+  midGoldRgb: "193, 176, 152",
 };
 
 export const GlobalStyle = createGlobalStyle`

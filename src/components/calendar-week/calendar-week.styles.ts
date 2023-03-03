@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { colors } from "../../global-styles";
 
 const guideColor = colors.duskyGold;
+const guideColorRgb = colors.duskyGoldRgb;
 const classesBlockColor = colors.midGold;
+const guideTimeFont = "1rem";
 
 export const CalendarGrid = styled.div`
   width: 70vw;
@@ -13,9 +15,7 @@ export const CalendarGrid = styled.div`
   grid-template-columns: 60px 1fr 60px;
 
   .calendar-guides {
-    /* position: relative; */
     z-index: 1;
-    /* transform: translateX(-30px); */
 
     grid-column: 2 / 2;
     grid-row: 2 / 2;
@@ -24,86 +24,36 @@ export const CalendarGrid = styled.div`
     grid-template-rows: repeat(12, 1fr);
 
     .guide {
-      border-top: 1px solid currentColor;
+      border-top: 1px solid rgba(${guideColorRgb}, 0.4);
       color: ${guideColor};
-      /* position: absolute;
-      left: 0; */
-      width: 100%;
+      width: calc(100% + 10px);
+      transform: translateX(-10px);
 
-      &.twenty_twentyone {
-        align-self: end;
+      &:not(.unnumbered) {
       }
 
-      /* &.unnumbered {
-        height: 1px;
-        width: 100%;
+      &.with-time {
+        display: grid;
+
+        .time {
+          font-size: ${guideTimeFont};
+          transform: translate(-3rem, -${guideTimeFont});
+        }
       }
 
-      &::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 40px;
-        background: currentColor;
-        height: 1px;
-        width: calc(100% + 20px);
-        transform: translateY(-50%);
-      } */
+      &.last {
+        border-bottom: 1px solid currentColor;
+        align-content: end;
 
-      /* &.nine {
-        top: 0;
+        .time {
+          font-size: ${guideTimeFont};
+          transform: translate(-3rem, ${guideTimeFont});
+        }
       }
-      &.ten {
-        top: 8.33333333334%;
-      }
-      &.eleven {
-        top: 16.6666666667%;
-      }
-
-      &.twelve {
-        top: 25%;
-      }
-
-      &.thirteen {
-        top: 33.3333333334%;
-      }
-
-      &.fourteen {
-        top: 41.6666666667%;
-      }
-
-      &.fifteen {
-        top: 50%;
-      }
-
-      &.sixteen {
-        top: 58.3333333334%;
-      }
-
-      &.seventeen {
-        top: 66.6666666667%;
-      }
-
-      &.eighteen {
-        top: 75%;
-      }
-
-      &.nineteen {
-        top: 83.3333333334%;
-      }
-
-      &.twenty {
-        top: 91.6666666667%;
-      }
-
-      &.twentyone {
-        top: 100%;
-      } */
     }
   }
 
   .calendar-grid {
-    /* transform: translateX(30px); */
     grid-column: 2 / 2;
     grid-row: 2 / 2;
     z-index: 2;
