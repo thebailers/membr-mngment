@@ -10,7 +10,7 @@ import {
 
 import ClassesMenu from "./classes-menu.component";
 import ClassList from "../class-list/class-list.component";
-import CalendarWeek from "../calendar-week/calendar-week.component";
+import CalendarWeek from "../calendar/calendar-week/calendar-week.component";
 
 const Classes = () => {
   const { weekday } = useParams();
