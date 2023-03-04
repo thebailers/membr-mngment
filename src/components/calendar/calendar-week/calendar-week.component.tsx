@@ -9,7 +9,6 @@ const CalendarWeek = () => {
   return (
     <CalendarGrid>
       <div className="calendar-grid">
-        {/* todo: dynamic days - 7 days from today */}
         <CalendarDay day={getDayStringFromDayIndex(todayInt)} />
         <CalendarDay day={getDayStringFromDayIndex(todayInt + 1)} />
         <CalendarDay day={getDayStringFromDayIndex(todayInt + 2)} />

@@ -7,7 +7,7 @@ const classesBlockColor = colors.midGold;
 const guideTimeFont = "1rem";
 
 export const CalendarGrid = styled.div`
-  width: 70vw;
+  width: 90vw;
   height: 98vh;
 
   display: grid;
@@ -81,6 +81,13 @@ export const CalendarGrid = styled.div`
 
       &:last-child {
         border-right: 1px dashed #fff;
+      }
+
+      .day-label {
+        font-size: 1.2rem;
+        line-height: 1;
+        text-align: center;
+        transform: translateY(-2rem);
       }
 
       .class {
