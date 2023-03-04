@@ -1,9 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { Link } from "react-router-dom";
 
-// images
-import charles from "../public/images/charles-negremonte.jpg";
-
 export const colors: { [key: string]: string } = {
   blue: "#63B0CD",
   blueRgb: "99, 176, 205",
@@ -69,7 +66,6 @@ export const GlobalStyle = createGlobalStyle`
   .App {
     background-image: 
       linear-gradient(to right bottom, rgba(57, 57, 58, 0.92), rgba(60, 60, 60, 0.92));
-
     position: relative;
   }
 

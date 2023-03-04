@@ -4,7 +4,7 @@ import {
   classTimes,
   classLength,
   classTypes,
-  daysOfTheWeek,
+  DaysOfTheWeek,
 } from "../../utils/class.utils";
 import {
   urlFriendlyTime,
@@ -23,7 +23,7 @@ export type ClassDetail = {
   id: number;
   time: classTimes;
   type: classTypes;
-  dayOfWeek: daysOfTheWeek;
+  dayOfWeek: DaysOfTheWeek;
   classLength: classLength;
 };
 

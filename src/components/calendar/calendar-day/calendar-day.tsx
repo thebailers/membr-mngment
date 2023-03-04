@@ -1,5 +1,8 @@
+import { ClassDetail } from "../../class-list/class-list.component";
+
 type TCalendarDay = {
   day: string;
+  classes: ClassDetail[];
 };
 
 const CalendarDay = ({ day }: TCalendarDay) => {
