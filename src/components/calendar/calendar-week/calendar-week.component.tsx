@@ -2,7 +2,7 @@ import CalendarDay from "../calendar-day/calendar-day";
 import CalendarGuides from "./calendar-guides.component";
 import { CalendarGrid } from "./calendar-week.styles";
 
-import { daysOfWeekArray } from "../../../utils/utils";
+import { getDayStringFromDayIndex } from "../../../utils/utils";
 
 const CalendarWeek = () => {
   const todayInt = new Date().getDay();
@@ -10,25 +10,13 @@ const CalendarWeek = () => {
     <CalendarGrid>
       <div className="calendar-grid">
         {/* todo: dynamic days - 7 days from today */}
-        <CalendarDay day={daysOfWeekArray[todayInt % daysOfWeekArray.length]} />
-        <CalendarDay
-          day={daysOfWeekArray[(todayInt + 1) % daysOfWeekArray.length]}
-        />
-        <CalendarDay
-          day={daysOfWeekArray[(todayInt + 2) % daysOfWeekArray.length]}
-        />
-        <CalendarDay
-          day={daysOfWeekArray[(todayInt + 3) % daysOfWeekArray.length]}
-        />
-        <CalendarDay
-          day={daysOfWeekArray[(todayInt + 4) % daysOfWeekArray.length]}
-        />
-        <CalendarDay
-          day={daysOfWeekArray[(todayInt + 5) % daysOfWeekArray.length]}
-        />
-        <CalendarDay
-          day={daysOfWeekArray[(todayInt + 6) % daysOfWeekArray.length]}
-        />
+        <CalendarDay day={getDayStringFromDayIndex(todayInt)} />
+        <CalendarDay day={getDayStringFromDayIndex(todayInt + 1)} />
+        <CalendarDay day={getDayStringFromDayIndex(todayInt + 2)} />
+        <CalendarDay day={getDayStringFromDayIndex(todayInt + 3)} />
+        <CalendarDay day={getDayStringFromDayIndex(todayInt + 4)} />
+        <CalendarDay day={getDayStringFromDayIndex(todayInt + 5)} />
+        <CalendarDay day={getDayStringFromDayIndex(todayInt + 6)} />
       </div>
 
       <CalendarGuides />

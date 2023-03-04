@@ -33,10 +33,14 @@ export const getWeekdayNumberFromURL = (day: weekdaysLowerCase): number =>
 export const getTodayDOWString = (): string =>
   daysOfWeekArray[new Date().getDay()];
 
+// Dates
 export const getDayOfWeekStringFromUrl = (
   url: string,
   replacePattern: string
 ): string => url.replace(replacePattern, "");
+
+export const getDayStringFromDayIndex = (d: number) =>
+  daysOfWeekArray[d % daysOfWeekArray.length];
 
 export const removeDuplicates = (arr1: Member[], arr2: Member[]) =>
   arr1.filter(
