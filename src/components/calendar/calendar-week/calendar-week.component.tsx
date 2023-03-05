@@ -3,7 +3,6 @@ import CalendarGuides from "./calendar-guides.component";
 import { CalendarGrid } from "./calendar-week.styles";
 
 import { getDayStringFromDayIndex } from "../../../utils/utils";
-import { useEffect } from "react";
 import { classesData, DaysOfTheWeek } from "../../../utils/class.utils";
 
 const CalendarWeek = () => {
@@ -21,6 +20,7 @@ const CalendarWeek = () => {
           const day = getDayStringFromDayIndex(todayInt + n);
           return (
             <CalendarDay
+              key={`day${n}`}
               day={day}
               classes={getClassesForGivenDay(day as DaysOfTheWeek)}
             />

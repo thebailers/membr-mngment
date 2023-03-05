@@ -37,7 +37,7 @@ export const getClassSigninTimes = (
   date: Date,
   hours: number,
   mins: number,
-  dur: number
+  dur: string
 ) => {
   const classSigninStart = subtractMinutes(
     getFormattedDate(date, hours, mins, 0),
@@ -45,7 +45,7 @@ export const getClassSigninTimes = (
   );
   const classSigninEnd = addMinutes(
     getFormattedDate(date, hours, mins, 0),
-    dur + 30
+    +dur + 30
   );
 
   return { classSigninStart, classSigninEnd };

@@ -28,7 +28,7 @@ const SpecificClass = () => {
     const data = classesData.find((c) => {
       if (weekday && time)
         return (
-          c.dayOfWeek === capitaliseFirstLetter(weekday) && c.time === time
+          c.dayOfWeek === capitaliseFirstLetter(weekday) && c.start === time
         );
       return undefined;
     });
@@ -51,7 +51,7 @@ const SpecificClass = () => {
         const now = new Date();
         // const now = new Date("Mon Jan 23 2023 18:14:00 GMT+0000");
         // const now = new Date("Mon Jan 23 2023 18:25:00 GMT+0000");
-        const classTime = classData.time; // 0930
+        const classTime = classData.start; // 0930
         const classTimeHours = parseInt(classTime.slice(0, 2));
         const classTimeMins = parseInt(classTime.slice(-2));
 
@@ -75,7 +75,7 @@ const SpecificClass = () => {
       {classData && canSignIn !== AccessStatus.pending ? (
         <SigninToClass
           dayOfWeek={classData.dayOfWeek}
-          time={classData.time}
+          time={classData.start}
           canSignIn={canSignIn}
         />
       ) : (

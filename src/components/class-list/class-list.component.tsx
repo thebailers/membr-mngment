@@ -1,11 +1,6 @@
 import { FC, useEffect, useState } from "react";
 
-import {
-  classTimes,
-  classLength,
-  classTypes,
-  DaysOfTheWeek,
-} from "../../utils/class.utils";
+import { ClassTypes, DaysOfTheWeek } from "../../utils/class.utils";
 import {
   urlFriendlyTime,
   urlFriendlyWeekday,
@@ -19,12 +14,19 @@ type ClassListProps = {
   activeWeekdayNumber: number;
 };
 
+/**
+ * Represents a single class.
+ */
 export type ClassDetail = {
   id: number;
-  time: classTimes;
-  type: classTypes;
+  /** start - a string of 4 numbers representing hours and minutes of the class' start time */
+  start: string;
+  /** end - a string of 4 numbers representing hours and minutes of the class' end time */
+  end: string;
+  type: ClassTypes;
   dayOfWeek: DaysOfTheWeek;
-  classLength: classLength;
+  /** minutes - a string of numbers representing the total class length in minutes */
+  classLength: string;
 };
 
 const ClassList: FC<ClassListProps> = ({
@@ -53,10 +55,10 @@ const ClassList: FC<ClassListProps> = ({
             <ClassTimeBlock
               to={`/classes/${urlFriendlyWeekday(
                 daysOfWeekArray[activeWeekdayNumber]
-              )}/${urlFriendlyTime(c.time)}`}
+              )}/${urlFriendlyTime(c.start)}`}
               key={c.id}
             >
-              {c.time}
+              {c.start}
             </ClassTimeBlock>
           ))}
         </div>

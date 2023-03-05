@@ -5,12 +5,18 @@ type TCalendarDay = {
   classes: ClassDetail[];
 };
 
-const CalendarDay = ({ day }: TCalendarDay) => {
+const CalendarDay = ({ day, classes }: TCalendarDay) => {
   return (
     <div className="day">
       <div className="day-label">{day}</div>
-      <div className="class nine15_ten45">Class 9.15 to 10.45</div>
-      <div className="class eighteen30_twenty30">Class 18.30 to 20.30</div>
+      {classes.map((c) => {
+        // get end time using start time and dur
+        return (
+          <div key={c.id} className={`class s${c.start}_e${c.end}`}>
+            Class
+          </div>
+        );
+      })}
     </div>
   );
 };

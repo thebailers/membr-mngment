@@ -3,42 +3,42 @@ import { Routes, Route } from "react-router-dom";
 import ClassList from "../class-list.component";
 import { renderWithRouter } from "../../../utils/testUtils";
 
-import {
-  classTimes,
-  classTypes,
-  classLength,
-} from "../../../utils/class.utils";
-import { daysOfTheWeek } from "../../../utils/class.utils";
+import { ClassTypes } from "../../../utils/class.utils";
+import { DaysOfTheWeek } from "../../../utils/class.utils";
 import { ClassDetail } from "../class-list.component";
 
 const MockClassesData: ClassDetail[] = [
   {
     id: 3,
-    time: classTimes.afternoon1600,
-    type: classTypes.cubs,
-    classLength: classLength.cubs,
-    dayOfWeek: daysOfTheWeek.wednesday,
+    start: "1600",
+    end: "1645",
+    type: ClassTypes.cubs,
+    classLength: "45",
+    dayOfWeek: DaysOfTheWeek.wednesday,
   },
   {
     id: 4,
-    time: classTimes.afternoon1645,
-    type: classTypes.juniors,
-    classLength: classLength.fundamentalsJuniors,
-    dayOfWeek: daysOfTheWeek.wednesday,
+    start: "1645",
+    end: "1745",
+    type: ClassTypes.juniors,
+    classLength: "60",
+    dayOfWeek: DaysOfTheWeek.wednesday,
   },
   {
     id: 5,
-    time: classTimes.evening1800,
-    type: classTypes.adults,
-    classLength: classLength.fundamentalsJuniors,
-    dayOfWeek: daysOfTheWeek.wednesday,
+    start: "1800",
+    end: "1900",
+    type: ClassTypes.adults,
+    classLength: "60",
+    dayOfWeek: DaysOfTheWeek.wednesday,
   },
   {
     id: 6,
-    time: classTimes.evening1930,
-    type: classTypes.adults,
-    classLength: classLength.standard,
-    dayOfWeek: daysOfTheWeek.wednesday,
+    start: "1900",
+    end: "2100",
+    type: ClassTypes.adults,
+    classLength: "120",
+    dayOfWeek: DaysOfTheWeek.wednesday,
   },
 ];
 
