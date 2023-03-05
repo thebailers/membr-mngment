@@ -3,7 +3,6 @@ import { colors } from "../../../global-styles";
 
 const guideColor = colors.duskyGold;
 const guideColorRgb = colors.duskyGoldRgb;
-const classesBlockColor = colors.midGold;
 const guideTimeFont = "1rem";
 
 export const CalendarGrid = styled.div`
@@ -92,15 +91,18 @@ export const CalendarGrid = styled.div`
       }
 
       .class {
-        background: ${classesBlockColor};
         padding: 5px;
 
-        &.nine15_ten45 {
-          grid-row: nine 2 / ten 4;
+        &-adults {
+          background: ${colors.midGold};
         }
 
-        &.eighteen30_twenty30 {
-          grid-row: eighteen 3 / twenty 3;
+        &-juniors {
+          background: ${colors.blue};
+        }
+
+        &-cubs {
+          background: ${colors.lilac};
         }
       }
 

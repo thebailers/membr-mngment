@@ -71,7 +71,7 @@ const CalendarDay = ({ day, classes }: TCalendarDay) => {
       {classes.map((c) => (
         <div
           key={c.id}
-          className={`class s${c.start}_e${c.end}`}
+          className={`class class-${c.type} s${c.start}_e${c.end}`}
           style={{ gridRow: getGridRowCSS(c.start, c.end) }}
         >
           Class
