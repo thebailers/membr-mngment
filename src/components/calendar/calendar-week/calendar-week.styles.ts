@@ -70,6 +70,7 @@ export const CalendarGrid = styled.div`
         repeat(4, [ten] 1fr [ten-end])
         repeat(4, [eleven] 1fr [eleven-end])
         repeat(4, [twelve] 1fr [twelve-end])
+        repeat(4, [thirteen] 1fr [thirteen-end])
         repeat(4, [fourteen] 1fr [fourteen-end])
         repeat(4, [fifteen] 1fr [fifteen-end])
         repeat(4, [sixteen] 1fr [sixteen-end])
