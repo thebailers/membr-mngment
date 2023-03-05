@@ -24,6 +24,7 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.adults,
     classLength: "120",
     dayOfWeek: DaysOfTheWeek.monday,
+    tags: ["gi"],
   },
   {
     id: 2,
@@ -32,6 +33,7 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.adults,
     classLength: "120",
     dayOfWeek: DaysOfTheWeek.tuesday,
+    tags: ["gi"],
   },
   {
     id: 3,
@@ -40,6 +42,7 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.cubs,
     classLength: "45",
     dayOfWeek: DaysOfTheWeek.wednesday,
+    tags: ["gi"],
   },
   {
     id: 4,
@@ -48,6 +51,7 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.juniors,
     classLength: "60",
     dayOfWeek: DaysOfTheWeek.wednesday,
+    tags: ["gi"],
   },
   {
     id: 5,
@@ -56,6 +60,7 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.adults,
     classLength: "60",
     dayOfWeek: DaysOfTheWeek.wednesday,
+    tags: ["gi"],
   },
   {
     id: 6,
@@ -64,6 +69,7 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.adults,
     classLength: "120",
     dayOfWeek: DaysOfTheWeek.wednesday,
+    tags: ["gi"],
   },
   {
     id: 7,
@@ -72,6 +78,7 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.adults,
     classLength: "120",
     dayOfWeek: DaysOfTheWeek.thursday,
+    tags: ["gi"],
   },
   {
     id: 8,
@@ -80,6 +87,7 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.adults,
     classLength: "120",
     dayOfWeek: DaysOfTheWeek.thursday,
+    tags: ["gi"],
   },
   {
     id: 9,
@@ -88,6 +96,7 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.adults,
     classLength: "120",
     dayOfWeek: DaysOfTheWeek.friday,
+    tags: ["gi", "nogi", "open mat"],
   },
   {
     id: 10,
@@ -96,6 +105,7 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.adults,
     classLength: "120",
     dayOfWeek: DaysOfTheWeek.saturday,
+    tags: ["gi"],
   },
   {
     id: 11,
@@ -104,6 +114,7 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.cubs,
     classLength: "45",
     dayOfWeek: DaysOfTheWeek.sunday,
+    tags: ["gi"],
   },
   {
     id: 12,
@@ -112,6 +123,7 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.juniors,
     classLength: "60",
     dayOfWeek: DaysOfTheWeek.sunday,
+    tags: ["gi"],
   },
   {
     id: 13,
@@ -120,5 +132,6 @@ export const classesData: ClassDetail[] = [
     type: ClassTypes.adults,
     classLength: "90",
     dayOfWeek: DaysOfTheWeek.sunday,
+    tags: ["gi"],
   },
 ];

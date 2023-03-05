@@ -27,6 +27,7 @@ export type ClassDetail = {
   dayOfWeek: DaysOfTheWeek;
   /** minutes - a string of numbers representing the total class length in minutes */
   classLength: string;
+  tags: string[];
 };
 
 const ClassList: FC<ClassListProps> = ({
