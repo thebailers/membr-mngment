@@ -35,9 +35,13 @@ const CalendarDay = ({ day, classes }: TCalendarDay) => {
             {c.start} - {c.end}
           </div>
           <div>{c.type}</div>
-          {c.tags.map((t, i) => (
-            <div key={i}>{t}</div>
-          ))}
+          {c.tags.length && (
+            <ul>
+              {c.tags.map((t, i) => (
+                <li key={i}>{t}</li>
+              ))}
+            </ul>
+          )}
         </div>
       ))}
     </div>

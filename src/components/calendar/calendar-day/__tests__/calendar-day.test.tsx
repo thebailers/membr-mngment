@@ -18,8 +18,8 @@ const setupProps = {
   ],
 };
 
-const setup = ({ day, classes }: TCalendarDay) => {
-  const utils = render(<CalendarDay {...setupProps} />);
+const setup = (calendarProps: TCalendarDay) => {
+  const utils = render(<CalendarDay {...calendarProps} />);
   return { ...utils };
 };
 
@@ -27,5 +27,26 @@ describe("calendar day", () => {
   it("displays a textual label for the day of the week", () => {
     setup(setupProps);
     expect(screen.getByText(/monday/i)).toBeInTheDocument();
+  });
+
+  it("displays the correct class information", () => {
+    setup(setupProps);
+    expect(screen.getByText(/1830 - 2030/i)).toBeInTheDocument();
+    expect(screen.getByText(/adults/i)).toBeInTheDocument();
+    expect(screen.getByText(/gi/i)).toBeInTheDocument();
+  });
+
+  it("displays all the tags", () => {
+    setup({
+      day: "Tuesday",
+      classes: [
+        { ...setupProps.classes[0], tags: ["lorem", "ipsum", "dolor"] },
+      ],
+    });
+    const tags = screen.getAllByRole("listitem");
+    expect(tags.length).toBe(3);
+    expect(screen.getByText(/lorem/i)).toBeInTheDocument();
+    expect(screen.getByText(/ipsum/i)).toBeInTheDocument();
+    expect(screen.getByText(/dolor/i)).toBeInTheDocument();
   });
 });
