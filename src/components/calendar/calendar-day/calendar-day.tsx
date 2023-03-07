@@ -5,7 +5,7 @@ import {
   getHourCSSGridName,
 } from "../../../utils/calendar.utils";
 
-type TCalendarDay = {
+export type TCalendarDay = {
   day: string;
   classes: ClassDetail[];
 };
