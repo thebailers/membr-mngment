@@ -1,6 +1,6 @@
 import { screen, render } from "@testing-library/react";
 
-import CalendarDay, { TCalendarDay } from "../calendar-day";
+import CalendarDay, { TCalendarDay } from "../calendar-day.component";
 import { ClassTypes, DaysOfTheWeek } from "../../../../utils/class.utils";
 
 const setupProps = {
