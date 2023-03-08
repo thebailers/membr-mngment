@@ -1,4 +1,4 @@
-import CalendarDay from "../calendar-day/calendar-day";
+import CalendarDay from "../calendar-day/calendar-day.component";
 import CalendarGuides from "./calendar-guides.component";
 import { CalendarGrid } from "./calendar-week.styles";
 
