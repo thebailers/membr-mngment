@@ -104,6 +104,10 @@ export const CalendarGrid = styled.div`
         &-cubs {
           background: ${colors.lilac};
         }
+
+        ul {
+          list-style: none;
+        }
       }
 
       &.monday {
