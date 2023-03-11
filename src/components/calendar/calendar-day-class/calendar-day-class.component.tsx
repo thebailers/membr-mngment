@@ -30,7 +30,6 @@ const CalendarDayClass = ({ c }: CalendarDayClassProps) => {
 
   return (
     <div
-      key={c.id}
       className={`class class-${c.type} s${c.start}_e${c.end}`}
       style={{ gridRow: getGridRowCSS(c.start, c.end) }}
     >

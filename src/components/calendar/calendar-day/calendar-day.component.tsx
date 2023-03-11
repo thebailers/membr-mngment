@@ -11,7 +11,7 @@ const CalendarDay = ({ day, classes }: TCalendarDay) => {
     <div className="day">
       <div className="day-label">{day}</div>
       {classes.map((c) => (
-        <CalendarDayClass c={c} />
+        <CalendarDayClass key={c.id} c={c} />
       ))}
     </div>
   );
