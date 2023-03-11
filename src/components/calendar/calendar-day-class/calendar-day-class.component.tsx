@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   getMinsCSSGridName,
   getHourCSSGridName,
@@ -9,6 +10,12 @@ export type CalendarDayClassProps = {
 };
 
 const CalendarDayClass = ({ c }: CalendarDayClassProps) => {
+  const [attending, setAttending] = useState<boolean>(false);
+
+  const toggleAttendingClass = () => {
+    setAttending(!attending);
+  };
+
   const getGridRowCSS = (start: string, end: string) => {
     const startHour = getHourCSSGridName(start.slice(0, 2));
     const startMinRow = getMinsCSSGridName(start.slice(2));
@@ -20,16 +27,18 @@ const CalendarDayClass = ({ c }: CalendarDayClassProps) => {
 
     return value;
   };
+
   return (
     <div
       key={c.id}
       className={`class class-${c.type} s${c.start}_e${c.end}`}
       style={{ gridRow: getGridRowCSS(c.start, c.end) }}
     >
-      <div>
+      <h3>
         {c.start} - {c.end}
-      </div>
-      <div>{c.type}</div>
+      </h3>
+      <h4>{c.type}</h4>
+
       {c.tags.length && (
         <ul>
           {c.tags.map((t, i) => (
@@ -37,6 +46,12 @@ const CalendarDayClass = ({ c }: CalendarDayClassProps) => {
           ))}
         </ul>
       )}
+
+      <button onClick={toggleAttendingClass}>
+        {attending
+          ? "I am attending this class"
+          : "I am not attending this class"}
+      </button>
     </div>
   );
 };
