@@ -7,7 +7,7 @@ import { classesData, DaysOfTheWeek } from "../../../utils/class.utils";
 
 const CalendarWeek = () => {
   const todayInt = new Date().getDay();
-  const daysOfTheWeekIndexes = [...Array(7).keys()];
+  const daysOfTheWeekIndexes = [0, 1, 2, 3, 4, 5, 6];
 
   const getClassesForGivenDay = (day: DaysOfTheWeek) => {
     return classesData.filter((c) => c.dayOfWeek === day);
