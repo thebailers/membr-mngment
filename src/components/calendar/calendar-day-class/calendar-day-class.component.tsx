@@ -12,6 +12,8 @@ export type CalendarDayClassProps = {
 const CalendarDayClass = ({ c }: CalendarDayClassProps) => {
   const [attending, setAttending] = useState<boolean>(false);
 
+  // fetch specific class details/roster for specific class on the specific date
+
   const toggleAttendingClass = () => {
     setAttending(!attending);
   };

@@ -50,3 +50,8 @@ export const getClassSigninTimes = (
 
   return { classSigninStart, classSigninEnd };
 };
+
+export const getDateXDaysFromToday = (d: number) => {
+  const today = new Date();
+  return new Date(today.setDate(today.getDate() + d));
+};

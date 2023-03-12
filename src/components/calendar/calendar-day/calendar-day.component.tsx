@@ -3,6 +3,7 @@ import CalendarDayClass from "../calendar-day-class/calendar-day-class.component
 
 export type TCalendarDay = {
   day: string;
+  date: Date;
   classes: ClassDetail[];
 };
 

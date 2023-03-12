@@ -5,6 +5,7 @@ import { ClassTypes, DaysOfTheWeek } from "../../../../utils/class.utils";
 
 const setupProps = {
   day: "Monday",
+  date: new Date("Mon Mar 13 2023 12:14:55 GMT+0000"),
   classes: [
     {
       id: 1,
@@ -69,6 +70,7 @@ describe("calendar day", () => {
   it("displays all the tags", () => {
     setup({
       day: "Tuesday",
+      date: new Date("Mon Mar 13 2023 12:14:55 GMT+0000"),
       classes: [
         { ...setupProps.classes[0], tags: ["lorem", "ipsum", "dolor"] },
       ],
@@ -83,6 +85,7 @@ describe("calendar day", () => {
   it("displays all the classes", () => {
     setup({
       day: "Tuesday",
+      date: new Date("Mon Mar 13 2023 12:14:55 GMT+0000"),
       classes: moreClasses,
     });
     const tagLists = screen.getAllByRole("list");

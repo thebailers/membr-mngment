@@ -48,7 +48,7 @@ export const removeDuplicates = (arr1: Member[], arr2: Member[]) =>
   );
 
 // returns boolean - checking if an object exists in both arrays
-export const duplicateObjectInArrays = <T,>(
+export const duplicateObjectInArrays = <T>(
   arr1: T[],
   arr2: T[],
   identifier: keyof T
