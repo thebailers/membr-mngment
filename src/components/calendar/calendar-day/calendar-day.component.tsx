@@ -1,9 +1,11 @@
 import { ClassDetail } from "../../class-list/class-list.component";
 import CalendarDayClass from "../calendar-day-class/calendar-day-class.component";
+import { ClassRosterForecastItem } from "../calendar-week/calendar-week.component";
 
 export type TCalendarDay = {
   day: string;
   date: Date;
+  dayRoster: ClassRosterForecastItem[];
   classes: ClassDetail[];
 };
 

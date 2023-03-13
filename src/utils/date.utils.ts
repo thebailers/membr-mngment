@@ -55,3 +55,9 @@ export const getDateXDaysFromToday = (d: number) => {
   const today = new Date();
   return new Date(today.setDate(today.getDate() + d));
 };
+
+export const compareTwoDatesIgnoringTime = (d1: Date, d2: Date) => {
+  const n1 = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate());
+  const n2 = new Date(d2.getFullYear(), d2.getMonth(), d2.getDate());
+  return n1.getTime() === n2.getTime();
+};
