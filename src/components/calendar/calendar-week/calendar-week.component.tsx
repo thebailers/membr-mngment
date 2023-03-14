@@ -21,7 +21,7 @@ export type ClassRosterForecastItem = {
 
 const forecastedAttendance: ClassRosterForecastItem[] = [
   {
-    "Mon Mar 06 2023 12:14:55 GMT+0000": {
+    "Mon Mar 13 2023 12:14:55 GMT+0000": {
       "1830": {
         signedUp: [
           "1", // array of userids
@@ -76,6 +76,7 @@ const CalendarWeek = () => {
               day={day}
               date={date}
               dayRoster={roster}
+              setDayRoster={setForecastedRoster}
               classes={getClassesForGivenDay(day as DaysOfTheWeek)}
             />
           );

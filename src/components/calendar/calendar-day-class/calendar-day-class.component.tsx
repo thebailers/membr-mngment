@@ -4,9 +4,12 @@ import {
   getHourCSSGridName,
 } from "../../../utils/calendar.utils";
 import { ClassDetail } from "../../class-list/class-list.component";
+import { ClassRosterForecastItem } from "../calendar-week/calendar-week.component";
 
 export type CalendarDayClassProps = {
   c: ClassDetail;
+  dayRoster: ClassRosterForecastItem[];
+  setDayRoster: React.Dispatch<React.SetStateAction<ClassRosterForecastItem[]>>;
 };
 
 const CalendarDayClass = ({ c }: CalendarDayClassProps) => {

@@ -6,15 +6,26 @@ export type TCalendarDay = {
   day: string;
   date: Date;
   dayRoster: ClassRosterForecastItem[];
+  setDayRoster: React.Dispatch<React.SetStateAction<ClassRosterForecastItem[]>>;
   classes: ClassDetail[];
 };
 
-const CalendarDay = ({ day, classes }: TCalendarDay) => {
+const CalendarDay = ({
+  day,
+  classes,
+  dayRoster,
+  setDayRoster,
+}: TCalendarDay) => {
   return (
     <div className="day">
       <div className="day-label">{day}</div>
       {classes.map((c) => (
-        <CalendarDayClass key={c.id} c={c} />
+        <CalendarDayClass
+          key={c.id}
+          c={c}
+          dayRoster={dayRoster}
+          setDayRoster={setDayRoster}
+        />
       ))}
     </div>
   );
