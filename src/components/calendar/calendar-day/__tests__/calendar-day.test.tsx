@@ -1,11 +1,16 @@
 import { screen, render } from "@testing-library/react";
 
 import CalendarDay, { TCalendarDay } from "../calendar-day.component";
+import { ClassRosterForecastItem } from "../../calendar-week/calendar-week.component";
 import { ClassTypes, DaysOfTheWeek } from "../../../../utils/class.utils";
+
+const roster: ClassRosterForecastItem[] = [];
 
 const setupProps = {
   day: "Monday",
   date: new Date("Mon Mar 13 2023 12:14:55 GMT+0000"),
+  dayRoster: roster,
+  setDayRoster: jest.fn(),
   classes: [
     {
       id: 1,
@@ -71,6 +76,8 @@ describe("calendar day", () => {
     setup({
       day: "Tuesday",
       date: new Date("Mon Mar 13 2023 12:14:55 GMT+0000"),
+      dayRoster: roster,
+      setDayRoster: jest.fn(),
       classes: [
         { ...setupProps.classes[0], tags: ["lorem", "ipsum", "dolor"] },
       ],
@@ -86,6 +93,8 @@ describe("calendar day", () => {
     setup({
       day: "Tuesday",
       date: new Date("Mon Mar 13 2023 12:14:55 GMT+0000"),
+      dayRoster: roster,
+      setDayRoster: jest.fn(),
       classes: moreClasses,
     });
     const tagLists = screen.getAllByRole("list");
