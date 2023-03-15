@@ -27,7 +27,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       let userSnapshot: DocumentData | null | undefined = null;
       if (user) {
         const result = await createUserDocumentFromAuth(user);
-        if (result) userSnapshot = result.data();
+        if (result) userSnapshot = { ...result.data(), uid: user.uid };
       }
       setCurrentUser(userSnapshot);
     });
