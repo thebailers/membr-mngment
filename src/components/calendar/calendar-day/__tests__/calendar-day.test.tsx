@@ -1,10 +1,10 @@
 import { screen, render } from "@testing-library/react";
 
 import CalendarDay, { TCalendarDay } from "../calendar-day.component";
-import { ClassRosterForecastItem } from "../../calendar-week/calendar-week.component";
+import { ClassRosterForecastObject } from "../../calendar-week/calendar-week.component";
 import { ClassTypes, DaysOfTheWeek } from "../../../../utils/class.utils";
 
-const roster: ClassRosterForecastItem[] = [];
+const roster: ClassRosterForecastObject[] = [];
 
 const setupProps = {
   day: "Monday",

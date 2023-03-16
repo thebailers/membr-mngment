@@ -1,18 +1,21 @@
 import { ClassDetail } from "../../class-list/class-list.component";
 import CalendarDayClass from "../calendar-day-class/calendar-day-class.component";
-import { ClassRosterForecastItem } from "../calendar-week/calendar-week.component";
+import { ClassRosterForecastObject } from "../calendar-week/calendar-week.component";
 
 export type TCalendarDay = {
   day: string;
-  date: Date;
-  dayRoster: ClassRosterForecastItem[];
-  setDayRoster: React.Dispatch<React.SetStateAction<ClassRosterForecastItem[]>>;
   classes: ClassDetail[];
+  date: Date;
+  dayRoster: ClassRosterForecastObject;
+  setDayRoster: React.Dispatch<
+    React.SetStateAction<ClassRosterForecastObject[]>
+  >;
 };
 
 const CalendarDay = ({
   day,
   classes,
+  date,
   dayRoster,
   setDayRoster,
 }: TCalendarDay) => {
@@ -23,6 +26,7 @@ const CalendarDay = ({
         <CalendarDayClass
           key={c.id}
           c={c}
+          date={date}
           dayRoster={dayRoster}
           setDayRoster={setDayRoster}
         />

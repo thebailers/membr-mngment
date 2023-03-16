@@ -1,21 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   getMinsCSSGridName,
   getHourCSSGridName,
 } from "../../../utils/calendar.utils";
 import { ClassDetail } from "../../class-list/class-list.component";
-import { ClassRosterForecastItem } from "../calendar-week/calendar-week.component";
+import { ClassRosterForecastObject } from "../calendar-week/calendar-week.component";
+import { UserContext } from "../../../contexts/user.context";
 
 export type CalendarDayClassProps = {
   c: ClassDetail;
-  dayRoster: ClassRosterForecastItem[];
-  setDayRoster: React.Dispatch<React.SetStateAction<ClassRosterForecastItem[]>>;
+  date: Date;
+  dayRoster: ClassRosterForecastObject;
+  setDayRoster: React.Dispatch<
+    React.SetStateAction<ClassRosterForecastObject[]>
+  >;
 };
 
-const CalendarDayClass = ({ c }: CalendarDayClassProps) => {
+const CalendarDayClass = ({
+  c,
+  date,
+  dayRoster,
+  setDayRoster,
+}: CalendarDayClassProps) => {
+  const { currentUser } = useContext(UserContext);
+  // const [attendees, setAttendees] = useState<string[] | null>(null);
   const [attending, setAttending] = useState<boolean>(false);
+  const [checkedIfAttending, setCheckedIfAttending] = useState<boolean>(false);
 
-  // fetch specific class details/roster for specific class on the specific date
+  // useEffect(() => {
+  //   const currentClass = dayRoster.classes.filter(
+  //     (cls) => cls.time === c.start
+  //   );
+  //   if (currentUser && currentClass.length > 0) {
+  //     setAttending(currentClass[0].registered.includes(currentUser.uid));
+  //     setCheckedIfAttending(true);
+  //   }
+  // }, [currentUser, dayRoster]);
+
+  useEffect(() => {
+    if (currentUser) {
+      console.log("yes");
+    } else {
+      console.log("no");
+    }
+  }, [currentUser]);
 
   const toggleAttendingClass = () => {
     setAttending(!attending);
@@ -33,6 +61,10 @@ const CalendarDayClass = ({ c }: CalendarDayClassProps) => {
     return value;
   };
 
+  const isAttending = () => {
+    return false;
+  };
+
   return (
     <div
       className={`class class-${c.type} s${c.start}_e${c.end}`}
@@ -42,7 +74,6 @@ const CalendarDayClass = ({ c }: CalendarDayClassProps) => {
         {c.start} - {c.end}
       </h3>
       <h4>{c.type}</h4>
-
       {c.tags.length && (
         <ul>
           {c.tags.map((t, i) => (
@@ -50,12 +81,13 @@ const CalendarDayClass = ({ c }: CalendarDayClassProps) => {
           ))}
         </ul>
       )}
-
-      <button onClick={toggleAttendingClass}>
-        {attending
-          ? "I am attending this class"
-          : "I am not attending this class"}
-      </button>
+      {checkedIfAttending && currentUser && (
+        <button onClick={toggleAttendingClass}>
+          {attending
+            ? "I am attending this class"
+            : "I am not attending this class"}
+        </button>
+      )}
     </div>
   );
 };

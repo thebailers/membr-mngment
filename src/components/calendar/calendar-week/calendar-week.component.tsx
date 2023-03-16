@@ -9,37 +9,68 @@ import {
   compareTwoDatesIgnoringTime,
 } from "../../../utils/date.utils";
 import { classesData, DaysOfTheWeek } from "../../../utils/class.utils";
-import { useEffect } from "react";
 
 export type ClassRosterForecastItem = {
-  [key: string]: {
-    [key: string]: {
-      signedUp: string[];
-    };
-  };
+  time: string;
+  registered: string[];
 };
 
-const forecastedAttendance: ClassRosterForecastItem[] = [
+export type ClassRosterForecastObject = {
+  date: Date;
+  classes: ClassRosterForecastItem[];
+};
+
+const forecastedAttendance: ClassRosterForecastObject[] = [
   {
-    "Mon Mar 13 2023 12:14:55 GMT+0000": {
-      "1830": {
-        signedUp: [
+    date: new Date("Wed Mar 15 2023 00:00:00 GMT+0000 (Greenwich Mean Time)"),
+    classes: [
+      {
+        time: "1600",
+        registered: [
           "1", // array of userids
         ],
       },
-      "2000": {
-        signedUp: ["3", "4", "7"],
-      },
-    },
-  },
-  {
-    "Sun Mar 12 2023 12:14:55 GMT+0000": {
-      "1930": {
-        signedUp: [
-          "2", // array of userids
+      {
+        time: "1645",
+        registered: [
+          "1", // array of userids
         ],
       },
-    },
+      {
+        time: "1800",
+        registered: [
+          "1", // array of userids
+        ],
+      },
+      {
+        time: "1900",
+        registered: [
+          "1", // array of userids
+        ],
+      },
+    ],
+  },
+  {
+    date: new Date("Thur Mar 16 2023 00:00:00 GMT+0000 (Greenwich Mean Time)"),
+    classes: [
+      {
+        time: "1930",
+        registered: [
+          "1", // array of userids
+        ],
+      },
+    ],
+  },
+  {
+    date: new Date("Fri Mar 17 2023 00:00:00 GMT+0000 (Greenwich Mean Time)"),
+    classes: [
+      {
+        time: "2030",
+        registered: [
+          "1", // array of userids
+        ],
+      },
+    ],
   },
 ];
 
@@ -49,7 +80,7 @@ const CalendarWeek = () => {
 
   // temporary store for class roster
   const [forecastedRoster, setForecastedRoster] =
-    useState<ClassRosterForecastItem[]>(forecastedAttendance);
+    useState<ClassRosterForecastObject[]>(forecastedAttendance);
 
   // useEffect(() => {
   //   // fetch week's classes roster, will come from firebase
@@ -65,17 +96,16 @@ const CalendarWeek = () => {
         {countOneWeek.map((n: number) => {
           const day = getDayStringFromDayIndex(todayInt + n);
           const date = getDateXDaysFromToday(n);
-          const roster = forecastedRoster.filter((rObj) => {
-            const dateKey = Object.keys(rObj)[0];
-            compareTwoDatesIgnoringTime(new Date(dateKey), date);
-            return compareTwoDatesIgnoringTime(new Date(dateKey), date);
-          });
+          const roster = forecastedRoster.filter((rObj) =>
+            compareTwoDatesIgnoringTime(rObj.date, date)
+          );
+
           return (
             <CalendarDay
               key={`day${n}`}
               day={day}
               date={date}
-              dayRoster={roster}
+              dayRoster={roster[0]}
               setDayRoster={setForecastedRoster}
               classes={getClassesForGivenDay(day as DaysOfTheWeek)}
             />
