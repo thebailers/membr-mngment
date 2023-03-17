@@ -6,6 +6,7 @@ import {
 import { ClassDetail } from "../../class-list/class-list.component";
 import { ClassRosterForecastObject } from "../calendar-week/calendar-week.component";
 import { UserContext } from "../../../contexts/user.context";
+import { ClassRosterForecastItem } from "../calendar-week/calendar-week.component";
 
 export type CalendarDayClassProps = {
   c: ClassDetail;
@@ -27,10 +28,10 @@ const CalendarDayClass = ({
   const [attending, setAttending] = useState<boolean>(false);
   const [checkedIfAttending, setCheckedIfAttending] = useState<boolean>(false);
 
+  console.log(dayRoster.classes);
+
   // useEffect(() => {
-  //   const currentClass = dayRoster.classes.filter(
-  //     (cls) => cls.time === c.start
-  //   );
+  //
   //   if (currentUser && currentClass.length > 0) {
   //     setAttending(currentClass[0].registered.includes(currentUser.uid));
   //     setCheckedIfAttending(true);
@@ -38,8 +39,13 @@ const CalendarDayClass = ({
   // }, [currentUser, dayRoster]);
 
   useEffect(() => {
-    if (currentUser) {
-      console.log("yes");
+    let currentClass: ClassRosterForecastItem | null = null;
+    if (dayRoster.classes.length > 0) {
+      currentClass = dayRoster.classes.filter((cls) => cls.time === c.start)[0];
+    }
+    if (currentUser && currentClass) {
+      setAttending(currentClass.registered.includes(currentUser.uid));
+      setCheckedIfAttending(true);
     } else {
       console.log("no");
     }
