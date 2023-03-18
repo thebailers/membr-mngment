@@ -61,12 +61,12 @@ const CalendarDayClass = ({
       className={`class class-${c.type} s${c.start}_e${c.end}`}
       style={{ gridRow: getGridRowCSS(c.start, c.end) }}
     >
-      <h3>
+      <h3 className="class-time">
         {c.start} - {c.end}
       </h3>
-      <h4>{c.type}</h4>
+      <h4 className="class-type">{c.type}</h4>
       {c.tags.length && (
-        <ul>
+        <ul className="class-tags">
           {c.tags.map((t, i) => (
             <li key={i}>{t}</li>
           ))}

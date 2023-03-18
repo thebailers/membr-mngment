@@ -108,7 +108,16 @@ export const CalendarGrid = styled.div`
           background: ${colors.lilac};
         }
 
-        ul {
+        &-time {
+          font-size: 1.2rem;
+        }
+
+        &-type {
+          font-size: 1.1rem;
+        }
+
+        &-tags {
+          font-size: 1.1rem;
           list-style: none;
         }
       }
