@@ -53,6 +53,7 @@ export const CalendarGrid = styled.div`
   }
 
   .calendar-grid {
+    height: 98vh;
     grid-column: 2 / 2;
     grid-row: 2 / 2;
     z-index: 2;
@@ -78,6 +79,7 @@ export const CalendarGrid = styled.div`
         repeat(4, [nineteen] 1fr [nineteen-end])
         repeat(4, [twenty] 1fr [twenty-end])
         repeat(4, [twentyone] 1fr [twentyone-end]);
+      height: 98vh;
 
       &:last-child {
         border-right: 1px dashed #fff;
@@ -91,6 +93,7 @@ export const CalendarGrid = styled.div`
       }
 
       .class {
+        overflow: hidden;
         padding: 5px;
 
         &-adults {
