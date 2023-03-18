@@ -96,29 +96,44 @@ export const CalendarGrid = styled.div`
         overflow: hidden;
         padding: 5px;
 
-        &-adults {
+        &--adults {
           background: ${colors.midGold};
         }
 
-        &-juniors {
+        &--juniors {
           background: ${colors.blue};
         }
 
-        &-cubs {
+        &--cubs {
           background: ${colors.lilac};
         }
 
-        &-time {
+        &--time {
           font-size: 1.2rem;
         }
 
-        &-type {
+        &--type {
           font-size: 1.1rem;
         }
 
-        &-tags {
+        &--tags {
           font-size: 1.1rem;
           list-style: none;
+
+          display: flex;
+          flex-wrap: wrap;
+
+          .class--tags-item {
+            background-color: ${colors.darkGrey};
+            border-radius: 1.5rem;
+            margin-bottom: 0.2rem;
+            padding: 0 1rem;
+            white-space: nowrap;
+
+            &:not(:last-child) {
+              margin-right: 0.2rem;
+            }
+          }
         }
       }
 
