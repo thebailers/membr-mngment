@@ -27,7 +27,6 @@ const CalendarDay = ({
         let rosterClass: RosterClass | undefined;
         if (dayRoster && dayRoster.classes.length > 0) {
           rosterClass = dayRoster.classes.find((dRC) => dRC.time === c.start);
-          debugger;
         }
         return (
           <CalendarDayClass

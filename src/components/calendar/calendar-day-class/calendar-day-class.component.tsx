@@ -30,7 +30,8 @@ const CalendarDayClass = ({
 
   useEffect(() => {
     if (currentUser && rosterClass) {
-      setAttending(rosterClass.registered.includes(currentUser.uid));
+      // setAttending(rosterClass.registered.includes(currentUser.uid));
+      setAttending(rosterClass.registered.includes("1"));
       setCheckedIfAttending(true);
     }
   }, [currentUser, rosterClass]);

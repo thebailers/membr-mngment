@@ -22,7 +22,7 @@ export type RosterDay = {
 
 const forecastedAttendance: RosterDay[] = [
   {
-    date: new Date("Wed Mar 15 2023 00:00:00 GMT+0000 (Greenwich Mean Time)"),
+    date: new Date("Wed Mar 22 2023 00:00:00 GMT+0000 (Greenwich Mean Time)"),
     classes: [
       {
         time: "1600",
