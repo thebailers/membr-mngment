@@ -10,17 +10,17 @@ import {
 } from "../../../utils/date.utils";
 import { classesData, DaysOfTheWeek } from "../../../utils/class.utils";
 
-export type ClassRosterForecastItem = {
+export type RosterClass = {
   time: string;
   registered: string[];
 };
 
-export type ClassRosterForecastObject = {
+export type RosterDay = {
   date: Date;
-  classes: ClassRosterForecastItem[];
+  classes: RosterClass[];
 };
 
-const forecastedAttendance: ClassRosterForecastObject[] = [
+const forecastedAttendance: RosterDay[] = [
   {
     date: new Date("Wed Mar 15 2023 00:00:00 GMT+0000 (Greenwich Mean Time)"),
     classes: [
@@ -80,11 +80,7 @@ const CalendarWeek = () => {
 
   // temporary store for class roster
   const [forecastedRoster, setForecastedRoster] =
-    useState<ClassRosterForecastObject[]>(forecastedAttendance);
-
-  // useEffect(() => {
-  //   // fetch week's classes roster, will come from firebase
-  // }, []);
+    useState<RosterDay[]>(forecastedAttendance);
 
   const getClassesForGivenDay = (day: DaysOfTheWeek) => {
     return classesData.filter((c) => c.dayOfWeek === day);
@@ -96,7 +92,7 @@ const CalendarWeek = () => {
         {countOneWeek.map((n: number) => {
           const day = getDayStringFromDayIndex(todayInt + n);
           const date = getDateXDaysFromToday(n);
-          const roster = forecastedRoster.filter((rObj) =>
+          const roster = forecastedRoster.find((rObj) =>
             compareTwoDatesIgnoringTime(rObj.date, date)
           );
 
@@ -105,7 +101,7 @@ const CalendarWeek = () => {
               key={`day${n}`}
               day={day}
               date={date}
-              dayRoster={roster[0]}
+              dayRoster={roster}
               setDayRoster={setForecastedRoster}
               classes={getClassesForGivenDay(day as DaysOfTheWeek)}
             />

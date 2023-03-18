@@ -4,23 +4,23 @@ import {
   getHourCSSGridName,
 } from "../../../utils/calendar.utils";
 import { ClassDetail } from "../../class-list/class-list.component";
-import { ClassRosterForecastObject } from "../calendar-week/calendar-week.component";
+import {
+  RosterClass,
+  RosterDay,
+} from "../calendar-week/calendar-week.component";
 import { UserContext } from "../../../contexts/user.context";
-import { ClassRosterForecastItem } from "../calendar-week/calendar-week.component";
 
 export type CalendarDayClassProps = {
   c: ClassDetail;
   date: Date;
-  dayRoster: ClassRosterForecastObject;
-  setDayRoster: React.Dispatch<
-    React.SetStateAction<ClassRosterForecastObject[]>
-  >;
+  rosterClass: RosterClass | undefined;
+  setDayRoster: React.Dispatch<React.SetStateAction<RosterDay[]>>;
 };
 
 const CalendarDayClass = ({
   c,
   date,
-  dayRoster,
+  rosterClass,
   setDayRoster,
 }: CalendarDayClassProps) => {
   const { currentUser } = useContext(UserContext);
@@ -28,28 +28,12 @@ const CalendarDayClass = ({
   const [attending, setAttending] = useState<boolean>(false);
   const [checkedIfAttending, setCheckedIfAttending] = useState<boolean>(false);
 
-  console.log(dayRoster.classes);
-
-  // useEffect(() => {
-  //
-  //   if (currentUser && currentClass.length > 0) {
-  //     setAttending(currentClass[0].registered.includes(currentUser.uid));
-  //     setCheckedIfAttending(true);
-  //   }
-  // }, [currentUser, dayRoster]);
-
   useEffect(() => {
-    let currentClass: ClassRosterForecastItem | null = null;
-    if (dayRoster.classes.length > 0) {
-      currentClass = dayRoster.classes.filter((cls) => cls.time === c.start)[0];
-    }
-    if (currentUser && currentClass) {
-      setAttending(currentClass.registered.includes(currentUser.uid));
+    if (currentUser && rosterClass) {
+      setAttending(rosterClass.registered.includes(currentUser.uid));
       setCheckedIfAttending(true);
-    } else {
-      console.log("no");
     }
-  }, [currentUser]);
+  }, [currentUser, rosterClass]);
 
   const toggleAttendingClass = () => {
     setAttending(!attending);
