@@ -30,10 +30,8 @@ const CalendarDayClass = ({
   const [checkedIfAttending, setCheckedIfAttending] = useState<boolean>(false);
 
   useEffect(() => {
-    if (currentUser && rosterClass) {
-      // setAttending(rosterClass.registered.includes(currentUser.uid));
-      setAttending(rosterClass.registered.includes("1"));
-    }
+    if (currentUser && rosterClass)
+      setAttending(rosterClass.registered.includes(currentUser.uid));
     setCheckedIfAttending(true);
   }, [currentUser, rosterClass]);
 
@@ -59,12 +57,7 @@ const CalendarDayClass = ({
               registered: [currentUser?.uid],
             })),
         };
-        setDayRoster((oldDayRoster) => {
-          console.log(oldDayRoster);
-          const toupdate = [...oldDayRoster, newRosterDay];
-          console.log(toupdate);
-          return [...oldDayRoster, newRosterDay];
-        });
+        setDayRoster((oldDayRoster) => [...oldDayRoster, newRosterDay]);
         // if no - we will create the date here, ready to add below
         // if no, we post a new doc with the added data above, this will rerender and handle ui update
       } else {
