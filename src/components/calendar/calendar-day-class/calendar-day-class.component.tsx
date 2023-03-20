@@ -1,14 +1,15 @@
 import { useEffect, useState, useContext } from "react";
-import {
-  getMinsCSSGridName,
-  getHourCSSGridName,
-} from "../../../utils/calendar.utils";
 import { ClassDetail } from "../../class-list/class-list.component";
 import {
   RosterClass,
   RosterDay,
 } from "../calendar-week/calendar-week.component";
 import { UserContext } from "../../../contexts/user.context";
+import {
+  getMinsCSSGridName,
+  getHourCSSGridName,
+} from "../../../utils/calendar.utils";
+import { classesData } from "../../../utils/class.utils";
 
 export type CalendarDayClassProps = {
   c: ClassDetail;
@@ -36,8 +37,40 @@ const CalendarDayClass = ({
     setCheckedIfAttending(true);
   }, [currentUser, rosterClass]);
 
+  /**
+   * Toggles the attending class status - this is not signing
+   * in to a class, rather informing of intention to attend
+   */
   const toggleAttendingClass = () => {
-    setAttending(!attending);
+    // setAttending(!attending);
+    if (attending) {
+      // remove uid from attending db doc for this class
+      // on update of rosterClass, rerender will handle ui update of user not attending
+    } else {
+      // check if day and class exist in the database for this roster date
+      if (typeof rosterClass === "undefined") {
+        // todo, bug below - only add user to the mapped class with the same start time as the clicked class
+        const newRosterDay: RosterDay = {
+          date,
+          classes: classesData
+            .filter((cls) => cls.dayOfWeek === c.dayOfWeek)
+            .map((cls) => ({
+              time: cls.start,
+              registered: [currentUser?.uid],
+            })),
+        };
+        setDayRoster((oldDayRoster) => {
+          console.log(oldDayRoster);
+          const toupdate = [...oldDayRoster, newRosterDay];
+          console.log(toupdate);
+          return [...oldDayRoster, newRosterDay];
+        });
+        // if no - we will create the date here, ready to add below
+        // if no, we post a new doc with the added data above, this will rerender and handle ui update
+      } else {
+        // if yes - we update the db entry with the uid. this will rerender and handle ui update
+      }
+    }
   };
 
   const getGridRowCSS = (start: string, end: string) => {
