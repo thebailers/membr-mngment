@@ -12,14 +12,14 @@ import {
 import { classesData } from "../../../utils/class.utils";
 
 export type CalendarDayClassProps = {
-  c: ClassDetail;
+  specificClass: ClassDetail;
   date: Date;
   rosterClass: RosterClass | undefined;
   setDayRoster: React.Dispatch<React.SetStateAction<RosterDay[]>>;
 };
 
 const CalendarDayClass = ({
-  c,
+  specificClass,
   date,
   rosterClass,
   setDayRoster,
@@ -46,14 +46,16 @@ const CalendarDayClass = ({
       // on update of rosterClass, rerender will handle ui update of user not attending
     } else {
       // check if day and class exist in the database for this roster date
-      if (typeof rosterClass === "undefined") {
+      if (!rosterClass) {
         // todo, bug below - only add user to the mapped class with the same start time as the clicked class
         const newRosterDay: RosterDay = {
           date,
           classes: classesData
-            .filter((cls) => cls.dayOfWeek === c.dayOfWeek)
-            .map((cls) => ({
-              time: cls.start,
+            .filter(
+              (classData) => classData.dayOfWeek === specificClass.dayOfWeek
+            )
+            .map((classData) => ({
+              time: classData.start,
               registered: [currentUser?.uid],
             })),
         };
@@ -84,18 +86,18 @@ const CalendarDayClass = ({
 
   return (
     <div
-      className={`class class--${c.type} s${c.start}_e${c.end}`}
-      style={{ gridRow: getGridRowCSS(c.start, c.end) }}
+      className={`class class--${specificClass.type} s${specificClass.start}_e${specificClass.end}`}
+      style={{ gridRow: getGridRowCSS(specificClass.start, specificClass.end) }}
     >
       <h3 className="class--time">
-        {c.start} - {c.end}
+        {specificClass.start} - {specificClass.end}
       </h3>
-      <h4 className="class--type">{c.type}</h4>
-      {c.tags.length && (
+      <h4 className="class--type">{specificClass.type}</h4>
+      {specificClass.tags.length && (
         <ul className="class--tags">
-          {c.tags.map((t, i) => (
+          {specificClass.tags.map((tag, i) => (
             <li key={i} className="class--tags-item">
-              {t}
+              {tag}
             </li>
           ))}
         </ul>

@@ -23,15 +23,17 @@ const CalendarDay = ({
   return (
     <div className="day">
       <div className="day-label">{day}</div>
-      {classes.map((c) => {
+      {classes.map((specificClass) => {
         let rosterClass: RosterClass | undefined;
         if (dayRoster && dayRoster.classes.length > 0) {
-          rosterClass = dayRoster.classes.find((dRC) => dRC.time === c.start);
+          rosterClass = dayRoster.classes.find(
+            (dRC) => dRC.time === specificClass.start
+          );
         }
         return (
           <CalendarDayClass
-            key={c.id}
-            c={c}
+            key={specificClass.id}
+            specificClass={specificClass}
             date={date}
             rosterClass={rosterClass}
             setDayRoster={setDayRoster}
