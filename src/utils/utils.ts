@@ -47,7 +47,14 @@ export const removeDuplicates = (arr1: Member[], arr2: Member[]) =>
     (array1Item) => arr2.findIndex((e) => e.id === array1Item.id) === -1
   );
 
-// returns boolean - checking if an object exists in both arrays
+/**
+Checks if any object in the first array exists in the second array, based on the specified identifier.
+@template T - The type of objects in the arrays.
+@param {T[]} arr1 - The first array to check.
+@param {T[]} arr2 - The second array to check.
+@param {keyof T} identifier - The identifier to compare the objects with.
+@returns {boolean} Whether any object in the first array exists in the second array.
+*/
 export const duplicateObjectInArrays = <T>(
   arr1: T[],
   arr2: T[],
