@@ -39,6 +39,11 @@ export const getDayOfWeekStringFromUrl = (
   replacePattern: string
 ): string => url.replace(replacePattern, "");
 
+/**
+Returns the day of the week as a string, given the day index.
+@param {number} d - The day index. Should be an integer value from 0 to 6, where 0 represents Sunday and 6 represents Saturday.
+@returns {string} - The day of the week as a string.
+*/
 export const getDayStringFromDayIndex = (d: number) =>
   daysOfWeekArray[d % daysOfWeekArray.length];
 
