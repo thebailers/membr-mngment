@@ -42,6 +42,12 @@ export const getDayOfWeekStringFromUrl = (
 export const getDayStringFromDayIndex = (d: number) =>
   daysOfWeekArray[d % daysOfWeekArray.length];
 
+/**
+Removes duplicates from an array of Member objects based on their "id" property.
+@param {Member[]} arr1 - The first array of Member objects.
+@param {Member[]} arr2 - The second array of Member objects.
+@returns {Member[]} - An array of Member objects that are present in arr1 but not in arr2.
+*/
 export const removeDuplicates = (arr1: Member[], arr2: Member[]) =>
   arr1.filter(
     (array1Item) => arr2.findIndex((e) => e.id === array1Item.id) === -1
