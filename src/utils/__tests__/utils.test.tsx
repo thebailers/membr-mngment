@@ -1,6 +1,6 @@
 import {
   daysOfWeekArray,
-  urlFriendlyTime,
+  removeDots,
   urlFriendlyWeekday,
   capitaliseFirstLetter,
   getTodayDOWString,
@@ -22,7 +22,7 @@ describe("utils", () => {
 
   test("UrlFriendlyTime correctly displays a url friendly time", () => {
     const time = "16.00";
-    const formattedTime = urlFriendlyTime(time);
+    const formattedTime = removeDots(time);
     expect(formattedTime).toBe("1600");
   });
 

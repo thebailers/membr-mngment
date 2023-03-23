@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 
 import { ClassTypes, DaysOfTheWeek } from "../../utils/class.utils";
 import {
-  urlFriendlyTime,
+  removeDots,
   urlFriendlyWeekday,
   daysOfWeekArray,
 } from "../../utils/utils";
@@ -56,7 +56,7 @@ const ClassList: FC<ClassListProps> = ({
             <ClassTimeBlock
               to={`/classes/${urlFriendlyWeekday(
                 daysOfWeekArray[activeWeekdayNumber]
-              )}/${urlFriendlyTime(c.start)}`}
+              )}/${removeDots(c.start)}`}
               key={c.id}
             >
               {c.start}
