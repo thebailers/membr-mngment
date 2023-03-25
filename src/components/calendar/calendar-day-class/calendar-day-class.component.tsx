@@ -48,13 +48,13 @@ const CalendarDayClass = ({
     } else {
       // check if day and class exist in the database for this roster date
       if (!rosterClass) {
-        // todo, bug below - only add user to the mapped class with the same start time as the clicked class
         const newRosterDay: RosterDay = {
           date,
           classes: classesData
             .filter(
               (classData) => classData.dayOfWeek === specificClass.dayOfWeek
             )
+            .filter((classData) => classData.start === specificClass.start)
             .map((classData) => ({
               time: classData.start,
               registered: [currentUser?.uid],
@@ -65,6 +65,9 @@ const CalendarDayClass = ({
         // if no, we post a new doc with the added data above, this will rerender and handle ui update
       } else {
         // if yes - we update the db entry with the uid. this will rerender and handle ui update
+        // check if dayroster.classes entry exists with specific class time
+        // if no create one, and add in the uid
+        // if yes, update the existing attending array with the current user uid
       }
     }
   };
@@ -79,10 +82,6 @@ const CalendarDayClass = ({
     const value = `${startHour} ${startMinRow} / ${endHour} ${endMinRow}`;
 
     return value;
-  };
-
-  const isAttending = () => {
-    return false;
   };
 
   return (
