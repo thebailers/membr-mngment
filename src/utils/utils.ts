@@ -45,11 +45,10 @@ export const capitaliseFirstLetter = (string: string): string =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
 /**
-
-Returns the index of the given weekday string in the daysOfWeekArray.
-@param {string} day - The lowercase weekday string to search for in the daysOfWeekArray.
-@returns {number} The index of the given weekday string in the daysOfWeekArray.
-*/
+ * Returns the day of the week index of the given weekday
+ * @param {string} day - The lowercase weekday string eg "monday"
+ * @returns {number} The day of the week index of the given string
+ */
 export const getWeekdayNumberFromURL = (day: weekdaysLowerCase): number =>
   daysOfWeekArray.indexOf(capitaliseFirstLetter(day));
 
