@@ -10,6 +10,7 @@ import {
   getHourCSSGridName,
 } from "../../../utils/calendar.utils";
 import { classesData } from "../../../utils/class.utils";
+import { stringIntegarToTime } from "../../../utils/utils";
 
 export type CalendarDayClassProps = {
   specificClass: ClassDetail;
@@ -90,9 +91,10 @@ const CalendarDayClass = ({
       style={{ gridRow: getGridRowCSS(specificClass.start, specificClass.end) }}
     >
       <h3 className="class--time">
-        {specificClass.start} - {specificClass.end}
+        {stringIntegarToTime(specificClass.start)} -{" "}
+        {stringIntegarToTime(specificClass.end)} -{" "}
+        <span className="class--type">{specificClass.type}</span>
       </h3>
-      <h4 className="class--type">{specificClass.type}</h4>
       {specificClass.tags.length && (
         <ul className="class--tags">
           {specificClass.tags.map((tag, i) => (

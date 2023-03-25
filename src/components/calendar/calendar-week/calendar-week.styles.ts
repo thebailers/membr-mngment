@@ -114,6 +114,7 @@ export const CalendarGrid = styled.div`
 
         &--type {
           font-size: 1.1rem;
+          text-transform: capitalize;
         }
 
         &--tags {

@@ -28,19 +28,25 @@ export enum weekdaysLowerCase {
 export const removeDots = (str: String): string => str.replace(".", "");
 
 /**
+ * Returns a timestamp string of hours and minutes dot separated
+ * @param {string} time - The string time to add the dot
+ * @returns {string} The timestamp dot separated
+ */
+export const stringIntegarToTime = (numString: string): string =>
+  (parseInt(numString) / 100).toFixed(2);
 
-Returns the lowercase version of the given string.
-@param {string} day - The string to convert to lowercase.
-@returns {string} The lowercase version of the given string.
-*/
+/**
+ * Returns the lowercase version of the given string.
+ * @param {string} day - The string to convert to lowercase.
+ * @returns {string} The lowercase version of the given string.
+ */
 export const urlFriendlyWeekday = (day: String): string => day.toLowerCase();
 
 /**
-
-Returns the given string with the first letter capitalized.
-@param {string} string - The string to capitalize the first letter of.
-@returns {string} The given string with the first letter capitalized.
-*/
+ * Returns the given string with the first letter capitalized.
+ * @param {string} string - The string to capitalize the first letter of.
+ * @returns {string} The given string with the first letter capitalized.
+ */
 export const capitaliseFirstLetter = (string: string): string =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
