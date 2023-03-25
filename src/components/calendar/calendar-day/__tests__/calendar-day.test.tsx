@@ -67,7 +67,7 @@ describe("calendar day", () => {
 
   it("displays the correct class information", () => {
     setup(setupProps);
-    expect(screen.getByText(/1830 - 2030/i)).toBeInTheDocument();
+    expect(screen.getByText(/18.30 - 20.30/i)).toBeInTheDocument();
     expect(screen.getByText(/adults/i)).toBeInTheDocument();
     expect(screen.getByText(/gi/i)).toBeInTheDocument();
   });
@@ -99,8 +99,8 @@ describe("calendar day", () => {
     });
     const tagLists = screen.getAllByRole("list");
     expect(tagLists.length).toBe(3);
-    expect(screen.getByText(/1430 - 1630/i)).toBeInTheDocument();
-    expect(screen.getByText(/1630 - 1830/i)).toBeInTheDocument();
-    expect(screen.getByText(/1830 - 2030/i)).toBeInTheDocument();
+    expect(screen.getByText(/14.30 - 16.30/i)).toBeInTheDocument();
+    expect(screen.getByText(/16.30 - 18.30/i)).toBeInTheDocument();
+    expect(screen.getByText(/18.30 - 20.30/i)).toBeInTheDocument();
   });
 });
