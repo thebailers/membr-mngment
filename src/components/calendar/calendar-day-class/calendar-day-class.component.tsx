@@ -16,14 +16,16 @@ export type CalendarDayClassProps = {
   specificClass: ClassDetail;
   date: Date;
   rosterClass: RosterClass | undefined;
-  setDayRoster: React.Dispatch<React.SetStateAction<RosterDay[]>>;
+  dayRoster: RosterDay | undefined;
+  updateCalendarWeek: (dayRoster: RosterDay) => void;
 };
 
 const CalendarDayClass = ({
   specificClass,
   date,
   rosterClass,
-  setDayRoster,
+  dayRoster,
+  updateCalendarWeek,
 }: CalendarDayClassProps) => {
   const { currentUser } = useContext(UserContext);
   // const [attendees, setAttendees] = useState<string[] | null>(null);
@@ -41,33 +43,38 @@ const CalendarDayClass = ({
    * in to a class, rather informing of intention to attend
    */
   const toggleAttendingClass = () => {
-    // setAttending(!attending);
+    // todo - this needs refactoring - helper classes to simplify
     if (attending) {
       // remove uid from attending db doc for this class
       // on update of rosterClass, rerender will handle ui update of user not attending
     } else {
-      // check if day and class exist in the database for this roster date
-      if (!rosterClass) {
-        const newRosterDay: RosterDay = {
+      // not currently attending - we need to add user to attending
+      // check if day exist in the database for this class on this date
+      if (!dayRoster) {
+        const newDayRoster: RosterDay = {
           date,
-          classes: classesData
-            .filter(
-              (classData) => classData.dayOfWeek === specificClass.dayOfWeek
-            )
-            .filter((classData) => classData.start === specificClass.start)
-            .map((classData) => ({
-              time: classData.start,
+          classes: [
+            {
+              time: specificClass.start,
               registered: [currentUser?.uid],
-            })),
+            },
+          ],
         };
-        setDayRoster((oldDayRoster) => [...oldDayRoster, newRosterDay]);
-        // if no - we will create the date here, ready to add below
-        // if no, we post a new doc with the added data above, this will rerender and handle ui update
-      } else {
-        // if yes - we update the db entry with the uid. this will rerender and handle ui update
-        // check if dayroster.classes entry exists with specific class time
-        // if no create one, and add in the uid
-        // if yes, update the existing attending array with the current user uid
+        updateCalendarWeek(newDayRoster);
+      }
+
+      if (dayRoster && !rosterClass) {
+        const newRosterClass: RosterClass = {
+          time: specificClass.start,
+          registered: [currentUser?.uid],
+        };
+
+        const updatedDayRoster: RosterDay = {
+          date: dayRoster.date,
+          classes: [...dayRoster.classes, newRosterClass],
+        };
+
+        updateCalendarWeek(updatedDayRoster);
       }
     }
   };

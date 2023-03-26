@@ -22,7 +22,9 @@ export type RosterDay = {
 
 const forecastedAttendance: RosterDay[] = [
   {
-    date: new Date("Wed Mar 22 2023 00:00:00 GMT+0000 (Greenwich Mean Time)"),
+    date: new Date(
+      "Sunday Mar 26 2023 00:00:00 GMT+0000 (Greenwich Mean Time)"
+    ),
     classes: [
       {
         time: "1600",
@@ -86,6 +88,22 @@ const CalendarWeek = () => {
     return classesData.filter((c) => c.dayOfWeek === day);
   };
 
+  const updateCalendarWeek = (dayRoster: RosterDay) => {
+    setForecastedRoster((prevWeekRoster) => {
+      const idx = forecastedRoster.findIndex(
+        (rosterDay) => rosterDay.date === dayRoster.date
+      );
+
+      if (idx === -1) {
+        return [...prevWeekRoster, dayRoster];
+      } else {
+        const newForecastRoster = [...prevWeekRoster];
+        newForecastRoster[idx] = dayRoster;
+        return newForecastRoster;
+      }
+    });
+  };
+
   return (
     <CalendarGrid>
       <div className="calendar-grid">
@@ -102,7 +120,7 @@ const CalendarWeek = () => {
               day={day}
               date={date}
               dayRoster={roster}
-              setDayRoster={setForecastedRoster}
+              updateCalendarWeek={updateCalendarWeek}
               classes={getClassesForGivenDay(day as DaysOfTheWeek)}
             />
           );

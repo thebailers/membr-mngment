@@ -10,7 +10,7 @@ export type TCalendarDay = {
   classes: ClassDetail[];
   date: Date;
   dayRoster: RosterDay | undefined;
-  setDayRoster: React.Dispatch<React.SetStateAction<RosterDay[]>>;
+  updateCalendarWeek: (dayRoster: RosterDay) => void;
 };
 
 const CalendarDay = ({
@@ -18,7 +18,7 @@ const CalendarDay = ({
   classes,
   date,
   dayRoster,
-  setDayRoster,
+  updateCalendarWeek,
 }: TCalendarDay) => {
   return (
     <div className="day">
@@ -36,7 +36,8 @@ const CalendarDay = ({
             specificClass={specificClass}
             date={date}
             rosterClass={rosterClass}
-            setDayRoster={setDayRoster}
+            dayRoster={dayRoster}
+            updateCalendarWeek={updateCalendarWeek}
           />
         );
       })}
