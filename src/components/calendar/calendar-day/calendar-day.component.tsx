@@ -1,3 +1,4 @@
+import type { DocumentData } from "firebase/firestore";
 import { ClassDetail } from "../../class-list/class-list.component";
 import CalendarDayClass from "../calendar-day-class/calendar-day-class.component";
 import {
@@ -11,6 +12,12 @@ export type TCalendarDay = {
   date: Date;
   dayRoster: RosterDay | undefined;
   updateCalendarWeek: (dayRoster: RosterDay) => void;
+  removeUserFromClassForecast: (
+    userID: DocumentData[string],
+    dayRoster: RosterDay,
+    time: string,
+    registered: string[] | undefined
+  ) => void;
 };
 
 const CalendarDay = ({
@@ -19,6 +26,7 @@ const CalendarDay = ({
   date,
   dayRoster,
   updateCalendarWeek,
+  removeUserFromClassForecast,
 }: TCalendarDay) => {
   return (
     <div className="day">
@@ -38,6 +46,7 @@ const CalendarDay = ({
             rosterClass={rosterClass}
             dayRoster={dayRoster}
             updateCalendarWeek={updateCalendarWeek}
+            removeUserFromClassForecast={removeUserFromClassForecast}
           />
         );
       })}

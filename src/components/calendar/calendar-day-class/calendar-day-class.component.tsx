@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import type { DocumentData } from "firebase/firestore";
 import { ClassDetail } from "../../class-list/class-list.component";
 import {
   RosterClass,
@@ -9,7 +10,6 @@ import {
   getMinsCSSGridName,
   getHourCSSGridName,
 } from "../../../utils/calendar.utils";
-import { classesData } from "../../../utils/class.utils";
 import { stringIntegarToTime } from "../../../utils/utils";
 
 export type CalendarDayClassProps = {
@@ -18,6 +18,12 @@ export type CalendarDayClassProps = {
   rosterClass: RosterClass | undefined;
   dayRoster: RosterDay | undefined;
   updateCalendarWeek: (dayRoster: RosterDay) => void;
+  removeUserFromClassForecast: (
+    userID: DocumentData[string],
+    dayRoster: RosterDay,
+    time: string,
+    registered: string[] | undefined
+  ) => void;
 };
 
 const CalendarDayClass = ({
@@ -26,6 +32,7 @@ const CalendarDayClass = ({
   rosterClass,
   dayRoster,
   updateCalendarWeek,
+  removeUserFromClassForecast,
 }: CalendarDayClassProps) => {
   const { currentUser } = useContext(UserContext);
   // const [attendees, setAttendees] = useState<string[] | null>(null);
@@ -47,6 +54,21 @@ const CalendarDayClass = ({
     if (attending) {
       // remove uid from attending db doc for this class
       // on update of rosterClass, rerender will handle ui update of user not attending
+      if (currentUser && dayRoster) {
+        removeUserFromClassForecast(
+          currentUser.uid,
+          dayRoster,
+          specificClass.start,
+          rosterClass?.registered
+        );
+      }
+
+      // const newRosterClass: RosterClass = {
+      //   time: specificClass.start,
+      //   registered: dayRoster?.classes
+      //     .find((dayClass) => dayClass.time === specificClass.start)
+      //     ?.registered.filter((userId) => userId !== currentUser?.uid),
+      // };
     } else {
       // not currently attending - we need to add user to attending
       // check if day exist in the database for this class on this date

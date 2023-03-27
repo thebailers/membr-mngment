@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { DocumentData } from "firebase/firestore";
 import CalendarDay from "../calendar-day/calendar-day.component";
 import CalendarGuides from "./calendar-guides.component";
 import { CalendarGrid } from "./calendar-week.styles";
@@ -104,6 +105,35 @@ const CalendarWeek = () => {
     });
   };
 
+  const removeUserFromClassForecast = (
+    userID: DocumentData[string],
+    dayRoster: RosterDay,
+    time: string,
+    registered: string[] | undefined
+  ) => {
+    if (registered) {
+      const updatedRosterClass: RosterClass = {
+        time,
+        registered: registered.filter((uid) => uid !== userID),
+      };
+
+      const updatedClasses = dayRoster.classes.map((classObj) => {
+        if (classObj.time === time) {
+          return updatedRosterClass;
+        } else {
+          return classObj;
+        }
+      });
+
+      const updatedDayRoster = {
+        date: dayRoster.date,
+        classes: updatedClasses,
+      };
+
+      updateCalendarWeek(updatedDayRoster);
+    }
+  };
+
   return (
     <CalendarGrid>
       <div className="calendar-grid">
@@ -122,6 +152,7 @@ const CalendarWeek = () => {
               dayRoster={roster}
               updateCalendarWeek={updateCalendarWeek}
               classes={getClassesForGivenDay(day as DaysOfTheWeek)}
+              removeUserFromClassForecast={removeUserFromClassForecast}
             />
           );
         })}
