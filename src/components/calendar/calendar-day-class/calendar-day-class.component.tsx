@@ -62,16 +62,7 @@ const CalendarDayClass = ({
           rosterClass?.registered
         );
       }
-
-      // const newRosterClass: RosterClass = {
-      //   time: specificClass.start,
-      //   registered: dayRoster?.classes
-      //     .find((dayClass) => dayClass.time === specificClass.start)
-      //     ?.registered.filter((userId) => userId !== currentUser?.uid),
-      // };
     } else {
-      // not currently attending - we need to add user to attending
-      // check if day exist in the database for this class on this date
       if (!dayRoster) {
         const newDayRoster: RosterDay = {
           date,
