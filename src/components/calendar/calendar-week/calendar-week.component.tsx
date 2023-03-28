@@ -90,16 +90,16 @@ const CalendarWeek = () => {
   };
 
   const updateCalendarWeek = (dayRoster: RosterDay) => {
-    setForecastedRoster((prevWeekRoster) => {
-      const idx = forecastedRoster.findIndex(
-        (rosterDay) => rosterDay.date === dayRoster.date
+    setForecastedRoster((rosterToUpdate) => {
+      const dayRosterToUpdateIdx = rosterToUpdate.findIndex(
+        (rosterDay) => rosterDay.date.getTime() === dayRoster.date.getTime()
       );
 
-      if (idx === -1) {
-        return [...prevWeekRoster, dayRoster];
+      if (dayRosterToUpdateIdx === -1) {
+        return [...rosterToUpdate, dayRoster];
       } else {
-        const newForecastRoster = [...prevWeekRoster];
-        newForecastRoster[idx] = dayRoster;
+        const newForecastRoster = [...rosterToUpdate];
+        newForecastRoster[dayRosterToUpdateIdx] = dayRoster;
         return newForecastRoster;
       }
     });

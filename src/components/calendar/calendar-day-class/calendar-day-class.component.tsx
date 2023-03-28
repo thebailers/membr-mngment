@@ -98,6 +98,27 @@ const CalendarDayClass = ({
 
         updateCalendarWeek(updatedDayRoster);
       }
+
+      if (dayRoster && rosterClass) {
+        // rosterClass exists
+        const updatedClassRoster = dayRoster.classes.map((classObj) => {
+          if (classObj.time === rosterClass.time) {
+            return {
+              time: classObj.time,
+              registered: [...classObj.registered, currentUser?.uid],
+            };
+          } else {
+            return classObj;
+          }
+        });
+
+        const updatedDayRoster: RosterDay = {
+          date,
+          classes: updatedClassRoster,
+        };
+
+        updateCalendarWeek(updatedDayRoster);
+      }
     }
   };
 
