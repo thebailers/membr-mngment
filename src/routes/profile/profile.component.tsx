@@ -13,9 +13,15 @@ const Profile = () => {
         <dd>number</dd>
         <dt>training_record</dt>
         <dd>[training-record]</dd>
+        <dt>attendance_log</dt>
+        <dd>[attendance-log]</dd>
       </dl>
 
       <h2>Training record</h2>
+      <p>
+        Need to list kids belt colours, and provide a way to lock belt types to
+        member type - adult/child
+      </p>
       <dl>
         <dt>belt_color</dt>
         <dd>[belt-colors]</dd>
@@ -23,12 +29,23 @@ const Profile = () => {
 
       <h2>Belt colours</h2>
       <ul>
-        <li>white</li>
-        <li>blue</li>
-        <li>purple</li>
-        <li>brown</li>
-        <li>black</li>
+        <li>white [c/a]</li>
+        <li>[ADD KIDS BELTS]</li>
+        <li>blue [a]</li>
+        <li>purple [a]</li>
+        <li>brown [a]</li>
+        <li>black [a]</li>
       </ul>
+
+      <h2>Attendance log</h2>
+      <dl>
+        <dt>total</dt>
+        <dd>number</dd>
+        <dt>since_last_stripe</dt>
+        <dd>number</dd>
+        <dt>since_last_belt</dt>
+        <dd>number</dd>
+      </dl>
     </div>
   );
 };
