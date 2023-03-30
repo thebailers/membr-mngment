@@ -58,6 +58,19 @@ export const GlobalStyle = createGlobalStyle`
     margin-bottom: 2.5rem;
   }
 
+  dl {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  dt {
+    width: 33%;
+  }
+
+  dd {
+    width: 66%;
+  }
+
   .hint {
     color: ${colors.duskyGold};
     margin-bottom: 0.7rem;
