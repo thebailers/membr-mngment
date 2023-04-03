@@ -31,6 +31,18 @@ const Profile = () => {
       <ul>
         <li>white [c/a]</li>
         <li>[ADD KIDS BELTS]</li>
+        <li>grey/white</li>
+        <li>grey</li>
+        <li>grey/black</li>
+        <li>yellow/white</li>
+        <li>yellow</li>
+        <li>yellow/black</li>
+        <li>orange/white</li>
+        <li>orange</li>
+        <li>orange/black</li>
+        <li>green/white</li>
+        <li>green</li>
+        <li>green/black</li>
         <li>blue [a]</li>
         <li>purple [a]</li>
         <li>brown [a]</li>
