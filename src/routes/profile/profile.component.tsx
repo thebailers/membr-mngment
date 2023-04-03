@@ -30,23 +30,22 @@ const Profile = () => {
       <h2>Belt colours</h2>
       <ul>
         <li>white [c/a]</li>
-        <li>[ADD KIDS BELTS]</li>
-        <li>grey/white</li>
-        <li>grey</li>
-        <li>grey/black</li>
-        <li>yellow/white</li>
-        <li>yellow</li>
-        <li>yellow/black</li>
-        <li>orange/white</li>
-        <li>orange</li>
-        <li>orange/black</li>
-        <li>green/white</li>
-        <li>green</li>
-        <li>green/black</li>
-        <li>blue [a]</li>
-        <li>purple [a]</li>
-        <li>brown [a]</li>
-        <li>black [a]</li>
+        <li>grey/white [kids only]</li>
+        <li>grey [kids only]</li>
+        <li>grey/black [kids only]</li>
+        <li>yellow/white [kids only]</li>
+        <li>yellow [kids only]</li>
+        <li>yellow/black [kids only]</li>
+        <li>orange/white [kids only]</li>
+        <li>orange [kids only]</li>
+        <li>orange/black [kids only]</li>
+        <li>green/white [kids only]</li>
+        <li>green [kids only]</li>
+        <li>green/black [kids only]</li>
+        <li>blue [adults only]</li>
+        <li>purple [adults only]</li>
+        <li>brown [adults only]</li>
+        <li>black [adults only]</li>
       </ul>
 
       <h2>Attendance log</h2>
