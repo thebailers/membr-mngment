@@ -15,6 +15,8 @@ const Profile = () => {
         <dd>[training-record]</dd>
         <dt>attendance_log</dt>
         <dd>[attendance-log]</dd>
+        <dt>membership_tier</dt>
+        <dd>[membership-tiers]</dd>
       </dl>
 
       <h2>Training record</h2>
@@ -56,6 +58,16 @@ const Profile = () => {
         <dd>number</dd>
         <dt>since_last_belt</dt>
         <dd>number</dd>
+      </dl>
+
+      <h2>Membership tiers</h2>
+      <dl>
+        <dt>tier 1</dt>
+        <dd>number</dd>
+        <dt>tier 3</dt>
+        <dd>number</dd>
+        <dt>pay as you go</dt>
+        <dd>session fee</dd>
       </dl>
     </div>
   );
